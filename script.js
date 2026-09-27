@@ -79,3 +79,49 @@ function initPhotoFallback() {
 
 initScramble();
 initPhotoFallback();
+
+/* ==========================================================================
+   Sección Proyectos (#projects)
+   ========================================================================== */
+
+// --- Brillo e inclinación de las tarjetas de proyecto (solo con mouse y sin reduced motion) ---
+
+const TILT_X_DEG = 7; // rotateX = (0.5 − y) × 7° → máximo ±3.5°
+const TILT_Y_DEG = 9; // rotateY = (x − 0.5) × 9° → máximo ±4.5°
+
+const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
+
+function initProjectCards() {
+  const finePointer = window.matchMedia('(pointer: fine)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Los eventos van en la celda, que no se transforma: sus medidas no cambian cuando la tarjeta se inclina.
+  document.querySelectorAll('.projects__cell').forEach((cell) => {
+    const card = cell.querySelector('.project');
+
+    const follow = (event) => {
+      // Las condiciones se revisan en cada evento: si cambian con la página abierta, el efecto se apaga
+      if (event.pointerType !== 'mouse' || !finePointer.matches || reducedMotion.matches) {
+        card.classList.remove('is-hovered');
+        return;
+      }
+
+      // Posición relativa del cursor: 0 = borde izquierdo / superior, 1 = borde derecho / inferior
+      const rect = cell.getBoundingClientRect();
+      const x = clamp01((event.clientX - rect.left) / rect.width);
+      const y = clamp01((event.clientY - rect.top) / rect.height);
+
+      card.style.setProperty('--mx', `${x * 100}%`);
+      card.style.setProperty('--my', `${y * 100}%`);
+      card.style.setProperty('--rx', `${(0.5 - y) * TILT_X_DEG}deg`);
+      card.style.setProperty('--ry', `${(x - 0.5) * TILT_Y_DEG}deg`);
+      card.classList.add('is-hovered');
+    };
+
+    cell.addEventListener('pointerenter', follow);
+    cell.addEventListener('pointermove', follow);
+    cell.addEventListener('pointerleave', () => card.classList.remove('is-hovered'));
+  });
+}
+
+initProjectCards();

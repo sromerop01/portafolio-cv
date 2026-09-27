@@ -14,6 +14,12 @@
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
+  /* Brillo e inclinación de las tarjetas de proyecto: valores iniciales (script.js los actualiza en cada tarjeta) */
+  --mx: 50%;
+  --my: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+
   color-scheme: dark;
 }
 
@@ -730,5 +736,160 @@ img {
   .job__tasks {
     border-top: 0;
     border-left: 1px dotted var(--border);
+  }
+}
+
+/* ==========================================================================
+   Sección Proyectos (#projects)
+   ========================================================================== */
+
+/* Móvil: una columna */
+.projects__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+/* Celda que nunca se transforma: recibe el hover y los eventos del mouse, así la tarjeta no "tiembla"
+   en los bordes al inclinarse y subir. La tarjeta la llena: las de una misma fila miden lo mismo. */
+.projects__cell {
+  display: grid;
+}
+
+/* --- Tarjeta de proyecto (fondo, borde y radio vienen de .card) --- */
+
+.project {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s ease-out;
+}
+
+.projects__cell:hover .project {
+  border-color: var(--accent);
+}
+
+/* Brillo que sigue al cursor: queda sobre el fondo de la tarjeta y debajo del texto */
+.project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: radial-gradient(circle 260px at var(--mx) var(--my), color-mix(in srgb, var(--accent) 15%, transparent), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* script.js agrega .is-hovered solo con mouse y sin reduced motion */
+.project.is-hovered {
+  transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-3px);
+}
+
+.project.is-hovered::before {
+  opacity: 1;
+}
+
+/* Fila superior: nombre a la izquierda y enlace a la derecha; si no caben, el enlace pasa debajo */
+.project__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.project__name {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.project__desc {
+  margin: 0.75rem 0 1.5rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Etiquetas en píldoras, alineadas al final de la tarjeta */
+.project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project__tag {
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* --- Enlaces externos (proyectos y tarjeta final) --- */
+
+.project__link,
+.projects__more-link {
+  font-family: var(--font-mono);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.project__link:focus-visible,
+.projects__more-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.project__link {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* --- Tarjeta final "más proyectos": la misma .card, con borde punteado y sin fondo --- */
+
+.projects__more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  border-style: dashed;
+  background-color: transparent;
+  text-align: center;
+}
+
+.projects__cmd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.projects__more-link {
+  font-size: 0.875rem;
+}
+
+/* --- Escritorio: 2 columnas × 3 filas (5 proyectos + tarjeta final) --- */
+
+@media (width >= 960px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project {
+    padding: 2rem;
   }
 }

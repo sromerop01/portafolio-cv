@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400&display=swap" rel="stylesheet">
+  <!-- La flecha ↗ de los enlaces no está en los subconjuntos anteriores: se pide aparte (solo ese carácter) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <!-- blocking="render": no se pinta nada hasta que corre el script, así el scramble arranca desde caracteres aleatorios -->
   <script src="script.js" defer blocking="render"></script>
@@ -132,6 +134,99 @@
             <li class="job__task">Actualmente lidero el desarrollo de una aplicación full-stack para métricas operativas y financieras, con despliegue planeado en AWS.</li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="sheet-header">
+          <span class="sheet-header__number" aria-hidden="true">03</span>
+          <h2 id="projects-title" class="sheet-header__title">Proyectos</h2>
+        </div>
+
+        <div class="projects__grid">
+          <div class="projects__cell">
+            <article class="card project">
+              <div class="project__head">
+                <h3 class="project__name">E-Commerce Frontend App</h3>
+                <a class="project__link" href="https://shop-reactts.netlify.app" target="_blank" rel="noopener noreferrer" aria-label="Ver demo de E-Commerce Frontend App (abre en una pestaña nueva)">Ver demo <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="project__desc">Tienda en línea construida como ejercicio de arquitectura frontend: componentes reutilizables, manejo de estado y despliegue continuo.</p>
+              <ul class="project__tags" role="list">
+                <li class="project__tag">React</li>
+                <li class="project__tag">TypeScript</li>
+                <li class="project__tag">Tailwind</li>
+                <li class="project__tag">Vite</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="projects__cell">
+            <article class="card project">
+              <div class="project__head">
+                <h3 class="project__name">NexaCloud</h3>
+              </div>
+              <p class="project__desc">Diseño de arquitectura cloud y migración on-prem a AWS, con balanceo de carga, base de datos gestionada y funciones serverless.</p>
+              <ul class="project__tags" role="list">
+                <li class="project__tag">AWS EC2</li>
+                <li class="project__tag">RDS</li>
+                <li class="project__tag">Lambda</li>
+                <li class="project__tag">VPC</li>
+                <li class="project__tag">PostgreSQL</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="projects__cell">
+            <article class="card project">
+              <div class="project__head">
+                <h3 class="project__name">Credit-Sale REST API</h3>
+                <a class="project__link" href="https://github.com/sromerop01/credit-sale-APIRestful" target="_blank" rel="noopener noreferrer" aria-label="Ver repo de Credit-Sale REST API (abre en una pestaña nueva)">Ver repo <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="project__desc">API RESTful para gestión de ventas a crédito, con documentación y pruebas de endpoints en Postman.</p>
+              <ul class="project__tags" role="list">
+                <li class="project__tag">PHP</li>
+                <li class="project__tag">SQL</li>
+                <li class="project__tag">Postman</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="projects__cell">
+            <article class="card project">
+              <div class="project__head">
+                <h3 class="project__name">Pfannenberg Advisor Agent</h3>
+                <a class="project__link" href="https://github.com/sromerop01/Agent-Sprint-Hackathon" target="_blank" rel="noopener noreferrer" aria-label="Ver repo de Pfannenberg Advisor Agent (abre en una pestaña nueva)">Ver repo <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="project__desc">Agente de IA asesor técnico construido en un hackathon, capaz de responder consultas sobre productos usando LLMs.</p>
+              <ul class="project__tags" role="list">
+                <li class="project__tag">Python</li>
+                <li class="project__tag">LangChain</li>
+                <li class="project__tag">Streamlit</li>
+                <li class="project__tag">LLMs</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="projects__cell">
+            <article class="card project">
+              <div class="project__head">
+                <h3 class="project__name">Terraform IaC en GCP</h3>
+                <a class="project__link" href="https://github.com/sromerop01/proyecto-terraform-grupo-12" target="_blank" rel="noopener noreferrer" aria-label="Ver repo de Terraform IaC en GCP (abre en una pestaña nueva)">Ver repo <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="project__desc">Infraestructura como código para un entorno de alta disponibilidad con balanceo de carga entre instancias primaria y de contingencia, con 3 escenarios de tráfico configurables.</p>
+              <ul class="project__tags" role="list">
+                <li class="project__tag">Terraform</li>
+                <li class="project__tag">GCP</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="card projects__more">
+            <p class="projects__cmd"><span class="accent" aria-hidden="true">$</span> ls ~/proyectos --all</p>
+            <a class="projects__more-link" href="https://github.com/sromerop01" target="_blank" rel="noopener noreferrer" aria-label="Más proyectos en GitHub (abre en una pestaña nueva)">Más proyectos en GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
