@@ -1,0 +1,250 @@
+/* ==========================================================================
+   Variables globales: paleta y tipografía (las reutilizan todas las secciones)
+   ========================================================================== */
+
+:root {
+  --color-bg: #0A1120;
+  --color-surface: #111A2C;
+  --color-text: #E9ECF4;
+  --color-accent: #E8A33D;
+  --color-border: #24304A;
+
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Sección Inicio (#hero)
+   ========================================================================== */
+
+.hero {
+  display: grid;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-block: 4rem;
+}
+
+/* Móvil: una columna (texto arriba, foto debajo) */
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  width: min(100% - 2rem, 75rem);
+  margin-inline: auto;
+}
+
+.hero__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(2.25rem, 1.5rem + 3.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hero__role {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-accent);
+  text-wrap: balance;
+}
+
+.hero__tagline {
+  max-width: 34ch;
+  margin: 1rem 0 0;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.5;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+/* --- Botones (son enlaces <a>) --- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.btn--solid {
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.btn--solid:hover {
+  border-color: var(--color-text);
+  background-color: var(--color-text);
+}
+
+.btn--outline {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* --- Tarjeta de foto --- */
+
+.photo-card {
+  position: relative;
+  width: min(100%, 20rem);
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+/* 4 marcas de esquina en L (brazos de 12 px × 2 px) montadas sobre el borde */
+.photo-card::after {
+  --mark: linear-gradient(var(--color-accent), var(--color-accent));
+
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background-image:
+    var(--mark), var(--mark),
+    var(--mark), var(--mark),
+    var(--mark), var(--mark),
+    var(--mark), var(--mark);
+  background-position:
+    top left, top left,
+    top right, top right,
+    bottom left, bottom left,
+    bottom right, bottom right;
+  background-size:
+    12px 2px, 2px 12px,
+    12px 2px, 2px 12px,
+    12px 2px, 2px 12px,
+    12px 2px, 2px 12px;
+  background-repeat: no-repeat;
+}
+
+.photo-card__label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+
+.photo-card__frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+/* Iniciales de respaldo: quedan detrás de la foto y se ven si esta no carga */
+.photo-card__initials {
+  font-family: var(--font-mono);
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.photo-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* opacity (y no display: none) para que el alt siga disponible para lectores de pantalla */
+.photo-card__img.is-broken {
+  opacity: 0;
+}
+
+/* --- Efecto scramble (lo arma script.js) ---
+   El texto real queda invisible en su sitio y reserva el espacio exacto;
+   la capa con caracteres aleatorios se pinta encima, recortada a ese espacio,
+   así que el resto del contenido nunca se desplaza. */
+
+[data-scramble] {
+  position: relative;
+}
+
+.scramble__ghost {
+  opacity: 0;
+}
+
+.scramble__noise {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* --- Escritorio: dos columnas (texto a la izquierda, foto a la derecha) --- */
+
+@media (min-width: 900px) {
+  .hero {
+    padding-block: 6rem;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 4rem;
+    width: min(100% - 6rem, 75rem);
+  }
+
+  .photo-card {
+    width: clamp(18rem, 30vw, 26rem);
+  }
+}

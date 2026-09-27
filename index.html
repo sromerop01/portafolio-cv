@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santiago Romero Porras</title>
+  <!-- Sin favicon por ahora: evita que el navegador pida /favicon.ico (404 en consola) -->
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- blocking="render": no se pinta nada hasta que corre el script, así el scramble arranca desde caracteres aleatorios -->
+  <script src="script.js" defer blocking="render"></script>
+</head>
+<body>
+  <main>
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <h1 id="hero-title" class="hero__title">Santiago Romero Porras</h1>
+          <p class="hero__role" data-scramble>Ingeniero Mecánico e Ingeniero de Sistemas.</p>
+          <p class="hero__tagline" data-scramble>Construyo software con la misma precisión con la que se diseñan máquinas.</p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#contact">Contactar</a>
+            <a class="btn btn--outline" href="#projects">Ver proyectos</a>
+          </div>
+        </div>
+
+        <figure class="photo-card">
+          <span class="photo-card__label" aria-hidden="true">IMG.01</span>
+          <div class="photo-card__frame">
+            <span class="photo-card__initials" aria-hidden="true">SRP</span>
+            <img class="photo-card__img" src="assets/img/perfil.jpeg" alt="Foto de perfil de Santiago Romero Porras">
+          </div>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
