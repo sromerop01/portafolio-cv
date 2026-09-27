@@ -2,12 +2,12 @@
    Sección Inicio (#hero)
    ========================================================================== */
 
-// --- Efecto scramble del rol y el tagline ---
+// --- Efecto scramble del eyebrow y el rol ---
 
 const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>-_/\\[]{}#*+=';
 const SCRAMBLE_STEP_MS = 22;       // cada paso dura 22 ms...
 const SCRAMBLE_CHARS_PER_STEP = 2; // ...y revela 2 caracteres más
-const SCRAMBLE_STAGGER_MS = 120;   // el tagline arranca 120 ms después del rol
+const SCRAMBLE_STAGGER_MS = 120;   // cada texto arranca 120 ms después del anterior
 
 function randomChar() {
   return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
@@ -55,15 +55,16 @@ function scramble(element, delay) {
 function initScramble() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  // En orden del documento: eyebrow (0 ms) y rol (120 ms)
   document.querySelectorAll('[data-scramble]').forEach((element, index) => {
     scramble(element, index * SCRAMBLE_STAGGER_MS);
   });
 }
 
-// --- Fallback de la foto: si no carga, se ocultan la imagen y el ícono roto y quedan las iniciales ---
+// --- Fallback de la foto de la credencial: si no carga, se ocultan la imagen y el ícono roto y quedan las iniciales ---
 
 function initPhotoFallback() {
-  const photo = document.querySelector('.photo-card__img');
+  const photo = document.querySelector('.credential__img');
   if (!photo) return;
 
   const showInitials = () => photo.classList.add('is-broken');

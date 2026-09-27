@@ -16,25 +16,66 @@
 <body>
   <main>
     <section id="hero" class="hero" aria-labelledby="hero-title">
+      <p class="hero__coords" aria-hidden="true">
+        <span>6.2442° N</span>
+        <span>75.5812° O</span>
+      </p>
+
       <div class="hero__inner">
         <div class="hero__content">
+          <p class="hero__eyebrow" data-scramble>INGENIERÍA + SOFTWARE</p>
+          <p class="hero__prompt" aria-hidden="true"><span class="accent">$</span> whoami</p>
           <h1 id="hero-title" class="hero__title">Santiago Romero Porras</h1>
-          <p class="hero__role" data-scramble>Ingeniero Mecánico e Ingeniero de Sistemas.</p>
-          <p class="hero__tagline" data-scramble>Construyo software con la misma precisión con la que se diseñan máquinas.</p>
+          <p class="hero__comment">// mecánica + sistemas</p>
+          <p class="hero__role" data-scramble>Ingeniero Mecánico formándose como Ingeniero de Sistemas.</p>
+          <p class="hero__meta">Medellín, Colombia</p>
+
           <div class="hero__actions">
             <a class="btn btn--solid" href="#contact">Contactar</a>
             <a class="btn btn--outline" href="#projects">Ver proyectos</a>
           </div>
         </div>
 
-        <figure class="photo-card">
-          <span class="photo-card__label" aria-hidden="true">IMG.01</span>
-          <div class="photo-card__frame">
-            <span class="photo-card__initials" aria-hidden="true">SRP</span>
-            <img class="photo-card__img" src="assets/img/perfil.jpeg" alt="Foto de perfil de Santiago Romero Porras">
+        <div class="credential">
+          <span class="credential__corners" aria-hidden="true"></span>
+          <span class="credential__slot" aria-hidden="true"></span>
+          <p class="credential__label">PASE DE ACCESO</p>
+
+          <div class="credential__photo">
+            <span class="credential__initials" aria-hidden="true">SRP</span>
+            <img class="credential__img" src="assets/img/perfil.jpeg" alt="Foto de perfil de Santiago Romero Porras">
           </div>
-        </figure>
+
+          <p class="credential__name">Santiago Romero Porras</p>
+          <p class="credential__pill">INGENIERO · DATOS &amp; TECH</p>
+
+          <dl class="credential__fields">
+            <div class="credential__field">
+              <dt>UNIVERSIDAD</dt>
+              <dd>U. Nacional de Colombia</dd>
+            </div>
+            <div class="credential__field">
+              <dt>CARRERA</dt>
+              <dd>Ing. Mecánica · Ing. Sistemas</dd>
+            </div>
+            <div class="credential__field">
+              <dt>CIUDAD</dt>
+              <dd>Medellín, Colombia</dd>
+            </div>
+          </dl>
+
+          <div class="credential__footer">
+            <div class="credential__barcode" aria-hidden="true"></div>
+            <p class="credential__id">ID-2026-SRP</p>
+          </div>
+        </div>
       </div>
+
+      <svg class="hero__divider" aria-hidden="true" focusable="false" width="80" height="16" viewBox="0 0 80 16" fill="none">
+        <path d="M4 8H30l3-5 4 10 3-12 3 12 4-10 3 5H76" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="4" cy="8" r="2.5" fill="currentColor"/>
+        <circle cx="76" cy="8" r="2.5" fill="currentColor"/>
+      </svg>
     </section>
   </main>
 </body>
