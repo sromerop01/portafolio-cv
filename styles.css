@@ -893,3 +893,434 @@ img {
     padding: 2rem;
   }
 }
+
+/* ==========================================================================
+   Sección Habilidades (#skills)
+   ========================================================================== */
+
+/* --- Marquee (decorativo): dos filas que se desplazan en sentidos opuestos --- */
+
+/* 0.7rem entre filas: el gap descuenta los 2px de padding superior de cada fila */
+.marquee {
+  display: grid;
+  gap: calc(0.7rem - 2px);
+  margin-top: 2.5rem;
+}
+
+/* Extremos desvanecidos; el padding superior deja subir 2px al chip sin que se recorte */
+.marquee__row {
+  overflow: hidden;
+  padding-top: 2px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+
+/* Pista: 5 juegos seguidos de los 7 chips (el original y 4 copias .is-clone). Cada juego mide
+   "7 chips + 7 separaciones" (el padding final completa la última), así que un desplazamiento de
+   un número entero de juegos se ve idéntico y los reinicios no se notan.
+   - marquee: avanza 2 juegos por ciclo (-40 % de la pista).
+   - marquee-brake (freno): se suma a la anterior y avanza 1 juego en sentido contrario en 2/3 del
+     ciclo, es decir, al 75 % de su velocidad. Solo corre con el cursor encima, así que la fila baja
+     al 25 % de su velocidad; al salir queda pausado donde iba y la fila no salta.
+   Entre las dos se desplazan como mucho 3 juegos: los 2 que sobran cubren siempre el ancho de la fila. */
+.marquee__track {
+  display: flex;
+  gap: 0.6rem;
+  width: max-content;
+  padding-right: 0.6rem;
+  animation: marquee 30s linear infinite, marquee-brake calc(30s / 1.5) linear infinite paused;
+  animation-composition: replace, add;
+}
+
+/* Fila 2: hacia la derecha (y su freno, hacia la izquierda) */
+.marquee__row--reverse .marquee__track {
+  animation-duration: 34s, calc(34s / 1.5);
+  animation-direction: reverse;
+}
+
+/* Con el cursor encima corre el freno: ambas filas van más lento, sin detenerse */
+.marquee:hover .marquee__track {
+  animation-play-state: running;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-40%);
+  }
+}
+
+@keyframes marquee-brake {
+  from {
+    transform: translateX(-20%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.chip {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background-color: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1;
+  white-space: nowrap;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Abreviatura: cuadro de 27px con --accent al 15 % */
+.chip__abbr {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Sin movimiento: cada chip una sola vez, en varias líneas si no caben */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__row {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee__track {
+    flex-wrap: wrap;
+    width: auto;
+    padding-right: 0;
+    animation: none;
+  }
+
+  .marquee .is-clone {
+    display: none;
+  }
+
+  .chip:hover {
+    transform: none;
+  }
+}
+
+/* --- Tabla de especificaciones ("Lista de materiales") --- */
+
+.specs {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+}
+
+.specs__label {
+  padding-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+/* Líneas de 1px entre filas, también arriba de la primera y debajo de la última */
+.specs tr {
+  border-top: 1px solid var(--border);
+}
+
+.specs tr:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.specs th,
+.specs td {
+  padding: 1rem 0;
+  line-height: 1.6;
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.specs th {
+  width: 14rem;
+  padding-right: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.specs td {
+  color: var(--text-muted);
+}
+
+/* Móvil: cada fila se apila (categoría arriba, tecnologías debajo). Al cambiar el display,
+   los role="table/row/rowheader/cell" del HTML mantienen la semántica de tabla. */
+@media (width < 960px) {
+  .specs,
+  .specs__label,
+  .specs tbody,
+  .specs tr,
+  .specs th,
+  .specs td {
+    display: block;
+  }
+
+  .specs th {
+    width: auto;
+    padding: 1rem 0 0.25rem;
+  }
+
+  .specs td {
+    padding: 0 0 1rem;
+  }
+}
+
+/* ==========================================================================
+   Sección Certificaciones y aprendizaje (#certs)
+   ========================================================================== */
+
+/* Móvil: una columna */
+.certs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Tarjeta (fondo, borde y radio vienen de .card): nombre a la izquierda y año a la derecha,
+   alineado con la primera línea del nombre aunque este ocupe dos */
+.cert {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.cert__name {
+  flex: 1;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.cert__year {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+}
+
+/* --- Escritorio: certificaciones en 2 columnas iguales --- */
+
+@media (width >= 960px) {
+  .certs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ==========================================================================
+   Sección Educación e idiomas (#education)
+   ========================================================================== */
+
+/* --- Educación --- */
+
+.degrees {
+  display: grid;
+  gap: 1rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Móvil: título arriba; institución y fechas debajo, sin línea de relleno */
+.degree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.degree__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Línea de relleno: como no tiene texto, su "base" es su borde inferior, así que con
+   align-items: baseline la línea punteada queda justo sobre la base del texto */
+.degree__leader {
+  display: none;
+  flex: 1;
+  border-bottom: 1px dotted var(--border);
+}
+
+.degree__meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* --- Idiomas: 2 columnas iguales (también en móvil) --- */
+
+.languages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.language {
+  padding: 1rem 1.25rem;
+}
+
+.language__name {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.language__level {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--accent);
+}
+
+/* --- Escritorio: cada carrera en una fila (título ····· institución · fechas) --- */
+
+@media (width >= 960px) {
+  .degree {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .degree__leader {
+    display: block;
+  }
+
+  .language {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Sección Contacto (#contact)
+   ========================================================================== */
+
+.contact__lead {
+  max-width: 34ch;
+  margin: 2.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem);
+  line-height: 1.35;
+}
+
+/* Lista etiqueta | valor, con líneas de 1px entre filas.
+   Móvil: etiqueta arriba y valor debajo. */
+.contact__list {
+  margin: 2.5rem 0 0;
+}
+
+.contact__row {
+  display: grid;
+  gap: 0.25rem;
+  padding-block: 1.5rem;
+}
+
+.contact__row + .contact__row {
+  border-top: 1px solid var(--border);
+}
+
+.contact__label {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact__value {
+  margin: 0;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.4;
+}
+
+.contact__link {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact__link:hover {
+  color: var(--accent);
+}
+
+.contact__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Pie de página
+   ========================================================================== */
+
+.site-footer {
+  padding-block: 2rem 3rem;
+}
+
+/* Nombre y ciudad a la izquierda, año a la derecha (en móvil el año baja si no cabe) */
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.site-footer__inner p {
+  margin: 0;
+}
+
+/* --- Escritorio: etiqueta y valor en la misma fila --- */
+
+@media (width >= 960px) {
+  .contact__list {
+    margin-top: 3.5rem;
+  }
+
+  .contact__row {
+    grid-template-columns: 12.5rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0 1.5rem;
+    padding-block: 2rem;
+  }
+}
