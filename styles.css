@@ -406,3 +406,329 @@ img {
     transform: rotate(-2deg);
   }
 }
+
+/* ==========================================================================
+   Secciones numeradas (01–07): contenedor, espaciado y encabezado de hoja
+   ========================================================================== */
+
+/* Mismo ancho máximo y márgenes laterales que el contenedor del hero */
+.container {
+  width: min(100% - 2rem, 75rem);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 4rem;
+}
+
+/* Entre dos secciones seguidas no se suman los paddings: queda solo el inferior de la primera */
+.section + .section {
+  padding-top: 0;
+}
+
+/* Encabezado de hoja: número + título + línea punteada que ocupa el resto del ancho */
+.sheet-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sheet-header::after {
+  content: "";
+  flex: 1;
+  border-top: 1px dotted var(--border);
+}
+
+.sheet-header__number {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.sheet-header__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Tarjeta: fondo, borde y radio comunes (ventana "perfil.md" y tarjeta de experiencia) */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--surface);
+}
+
+@media (width >= 960px) {
+  .container {
+    width: min(100% - 6rem, 75rem);
+  }
+
+  .section {
+    padding-block: 6rem;
+  }
+}
+
+/* ==========================================================================
+   Sección Sobre mí (#profile)
+   ========================================================================== */
+
+/* Móvil: una columna (ventana arriba, línea de tiempo debajo) */
+.profile__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  margin-top: 2.5rem;
+}
+
+/* --- Ventana "perfil.md" (fondo, borde y radio vienen de .card) --- */
+
+.window__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.window__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.window__dot--accent {
+  background-color: var(--accent);
+}
+
+.window__dot--muted {
+  background-color: var(--text-muted);
+}
+
+.window__dot--border {
+  background-color: var(--border);
+}
+
+.window__title {
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.window__body {
+  padding: 1.5rem;
+}
+
+.profile__intro {
+  margin: 0;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* --- Línea de tiempo vertical ---
+   Los dos nodos son idénticos y no hay gap entre ellos: el espacio entre nodos es su padding-bottom,
+   así el alto del primer nodo es exactamente la distancia entre los centros de los dos círculos. */
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__item {
+  position: relative;
+  padding: 0 0 2rem 1.75rem;
+}
+
+/* Círculo del nodo, centrado con la primera línea del nombre (0.75rem = mitad de su line-height) */
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  top: calc(0.75rem - 5px);
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background-color: var(--bg);
+}
+
+/* Línea que une los círculos: del borde inferior del primero al borde superior del segundo */
+.timeline__line {
+  position: absolute;
+  top: calc(0.75rem + 5px);
+  bottom: calc(5px - 0.75rem);
+  left: 4.5px;
+  border-left: 1px dotted var(--border);
+}
+
+/* Pulso: pista invisible que arranca en el centro del primer círculo y mide lo mismo que el nodo
+   (la distancia entre centros). El punto va en su borde superior y la animación desplaza la pista
+   el 100 % de su propio alto, hasta el centro del segundo círculo. Se pinta encima de ambos círculos. */
+.timeline__pulse {
+  position: absolute;
+  z-index: 1;
+  top: 0.75rem;
+  left: 5px;
+  height: 100%;
+  animation: timeline-pulse 2.6s ease-in-out infinite;
+}
+
+.timeline__pulse::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: 0 0 8px 2px var(--accent);
+  transform: translate(-50%, -50%);
+}
+
+/* Aparece al salir y se desvanece al llegar: empieza y termina invisible, así el reinicio no se nota */
+@keyframes timeline-pulse {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  15%,
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+.timeline__name {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.timeline__date {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline__pulse {
+    display: none;
+  }
+}
+
+/* --- Escritorio: dos columnas alineadas arriba (≈60 % ventana, 40 % línea de tiempo) --- */
+
+@media (width >= 960px) {
+  .profile__grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+  }
+
+  .window__body {
+    padding: 2rem;
+  }
+}
+
+/* ==========================================================================
+   Sección Experiencia (#experience)
+   ========================================================================== */
+
+/* Tarjeta de experiencia (fondo, borde y radio vienen de .card).
+   Móvil: una columna; datos del cargo arriba y responsabilidades debajo, separados por una línea punteada. */
+.job {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 2.5rem;
+}
+
+/* El padding va en cada columna, no en la tarjeta: así el separador punteado va de borde a borde */
+.job__header,
+.job__tasks {
+  padding: 1.5rem;
+}
+
+.job__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.job__org {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  text-wrap: balance;
+}
+
+.job__dates {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--accent);
+}
+
+/* --- Responsabilidades --- */
+
+.job__tasks {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  border-top: 1px dotted var(--border);
+  list-style: none;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.job__task {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+/* Marcador "›" en --accent. El texto alternativo vacío ("") hace que los lectores de pantalla no lo lean. */
+.job__task::before {
+  content: "›" / "";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* --- Escritorio: datos del cargo a la izquierda (35 %) y responsabilidades a la derecha (65 %) --- */
+
+@media (width >= 960px) {
+  .job {
+    grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
+  }
+
+  .job__header,
+  .job__tasks {
+    padding: 2rem;
+  }
+
+  .job__tasks {
+    border-top: 0;
+    border-left: 1px dotted var(--border);
+  }
+}
