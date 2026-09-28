@@ -1,0 +1,23 @@
+# Sistema operativo
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Registros y archivos temporales
+*.log
+*.tmp
+
+# Variables de entorno y credenciales
+.env
+.env.*
+
+# Dependencias y salidas de herramientas (por si se agregan más adelante)
+node_modules/
+dist/

@@ -1,0 +1,92 @@
+/* ------------------------------------------------------------------
+   Skill icons · sromerop
+   Iconos monocromos (currentColor). En reposo toman --accent; en hover
+   el color de la marca, ajustado para contraste ≥ 3:1 en cada tema.
+   ------------------------------------------------------------------ */
+.skill-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  display: block;
+}
+
+.chip-tag {
+  color: var(--accent);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.skill-chip:hover .chip-tag,
+.skill-chip:focus-visible .chip-tag {
+  color: var(--brand, var(--accent));
+  background: color-mix(in srgb, var(--brand, var(--accent)) 16%, transparent);
+}
+
+/* colores de marca · tema claro (por defecto) */
+[data-skill="java"] { --brand: #E76F00; }
+[data-skill="php"] { --brand: #777BB4; }
+[data-skill="laravel"] { --brand: #FF2D20; }
+[data-skill="python"] { --brand: #3776AB; }
+[data-skill="react"] { --brand: #4499B0; }  /* original #61DAFB */
+[data-skill="typescript"] { --brand: #3178C6; }
+[data-skill="nextjs"] { --brand: #000000; }
+[data-skill="tailwind"] { --brand: #059BB4; }  /* original #06B6D4 */
+[data-skill="vite"] { --brand: #9135FF; }
+[data-skill="aws"] { --brand: #CC7A00; }  /* original #FF9900 */
+[data-skill="gcp"] { --brand: #4285F4; }
+[data-skill="terraform"] { --brand: #844FBA; }
+[data-skill="docker"] { --brand: #2496ED; }
+[data-skill="postgresql"] { --brand: #4169E1; }
+[data-skill="langchain"] { --brand: #5F96BF; }  /* original #7FC8FF */
+[data-skill="streamlit"] { --brand: #FF4B4B; }
+[data-skill="git"] { --brand: #F03C2E; }
+[data-skill="github"] { --brand: #181717; }
+[data-skill="postman"] { --brand: #F26734; }  /* original #FF6C37 */
+[data-skill="vscode"] { --brand: #007ACC; }
+
+/* colores de marca · tema oscuro (mismo patrón de tokens de la página) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-skill="java"] { --brand: #E76F00; }
+  :root:not([data-theme="light"]) [data-skill="php"] { --brand: #777BB4; }
+  :root:not([data-theme="light"]) [data-skill="laravel"] { --brand: #FF2D20; }
+  :root:not([data-theme="light"]) [data-skill="python"] { --brand: #3776AB; }
+  :root:not([data-theme="light"]) [data-skill="react"] { --brand: #61DAFB; }
+  :root:not([data-theme="light"]) [data-skill="typescript"] { --brand: #3178C6; }
+  :root:not([data-theme="light"]) [data-skill="nextjs"] { --brand: var(--text); }
+  :root:not([data-theme="light"]) [data-skill="tailwind"] { --brand: #06B6D4; }
+  :root:not([data-theme="light"]) [data-skill="vite"] { --brand: #9135FF; }
+  :root:not([data-theme="light"]) [data-skill="aws"] { --brand: #FF9900; }
+  :root:not([data-theme="light"]) [data-skill="gcp"] { --brand: #4285F4; }
+  :root:not([data-theme="light"]) [data-skill="terraform"] { --brand: #844FBA; }
+  :root:not([data-theme="light"]) [data-skill="docker"] { --brand: #2496ED; }
+  :root:not([data-theme="light"]) [data-skill="postgresql"] { --brand: #4169E1; }
+  :root:not([data-theme="light"]) [data-skill="langchain"] { --brand: #7FC8FF; }
+  :root:not([data-theme="light"]) [data-skill="streamlit"] { --brand: #FF4B4B; }
+  :root:not([data-theme="light"]) [data-skill="git"] { --brand: #F03C2E; }
+  :root:not([data-theme="light"]) [data-skill="github"] { --brand: var(--text); }
+  :root:not([data-theme="light"]) [data-skill="postman"] { --brand: #FF6C37; }
+  :root:not([data-theme="light"]) [data-skill="vscode"] { --brand: #007ACC; }
+}
+:root[data-theme="dark"] [data-skill="java"] { --brand: #E76F00; }
+:root[data-theme="dark"] [data-skill="php"] { --brand: #777BB4; }
+:root[data-theme="dark"] [data-skill="laravel"] { --brand: #FF2D20; }
+:root[data-theme="dark"] [data-skill="python"] { --brand: #3776AB; }
+:root[data-theme="dark"] [data-skill="react"] { --brand: #61DAFB; }
+:root[data-theme="dark"] [data-skill="typescript"] { --brand: #3178C6; }
+:root[data-theme="dark"] [data-skill="nextjs"] { --brand: var(--text); }
+:root[data-theme="dark"] [data-skill="tailwind"] { --brand: #06B6D4; }
+:root[data-theme="dark"] [data-skill="vite"] { --brand: #9135FF; }
+:root[data-theme="dark"] [data-skill="aws"] { --brand: #FF9900; }
+:root[data-theme="dark"] [data-skill="gcp"] { --brand: #4285F4; }
+:root[data-theme="dark"] [data-skill="terraform"] { --brand: #844FBA; }
+:root[data-theme="dark"] [data-skill="docker"] { --brand: #2496ED; }
+:root[data-theme="dark"] [data-skill="postgresql"] { --brand: #4169E1; }
+:root[data-theme="dark"] [data-skill="langchain"] { --brand: #7FC8FF; }
+:root[data-theme="dark"] [data-skill="streamlit"] { --brand: #FF4B4B; }
+:root[data-theme="dark"] [data-skill="git"] { --brand: #F03C2E; }
+:root[data-theme="dark"] [data-skill="github"] { --brand: var(--text); }
+:root[data-theme="dark"] [data-skill="postman"] { --brand: #FF6C37; }
+:root[data-theme="dark"] [data-skill="vscode"] { --brand: #007ACC; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-tag { transition: none; }
+}
