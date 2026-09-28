@@ -42,6 +42,8 @@
 [data-skill="github"] { --brand: #181717; }
 [data-skill="postman"] { --brand: #F26734; }  /* original #FF6C37 */
 [data-skill="vscode"] { --brand: #007ACC; }
+[data-skill="linkedin"] { --brand: #0A66C2; }
+[data-skill="whatsapp"] { --brand: #1EA952; }  /* original #25D366 */
 
 /* colores de marca · tema oscuro (mismo patrón de tokens de la página) */
 @media (prefers-color-scheme: dark) {
@@ -65,6 +67,8 @@
   :root:not([data-theme="light"]) [data-skill="github"] { --brand: var(--text); }
   :root:not([data-theme="light"]) [data-skill="postman"] { --brand: #FF6C37; }
   :root:not([data-theme="light"]) [data-skill="vscode"] { --brand: #007ACC; }
+  :root:not([data-theme="light"]) [data-skill="linkedin"] { --brand: #0A66C2; }
+  :root:not([data-theme="light"]) [data-skill="whatsapp"] { --brand: #25D366; }
 }
 :root[data-theme="dark"] [data-skill="java"] { --brand: #E76F00; }
 :root[data-theme="dark"] [data-skill="php"] { --brand: #777BB4; }
@@ -86,6 +90,8 @@
 :root[data-theme="dark"] [data-skill="github"] { --brand: var(--text); }
 :root[data-theme="dark"] [data-skill="postman"] { --brand: #FF6C37; }
 :root[data-theme="dark"] [data-skill="vscode"] { --brand: #007ACC; }
+:root[data-theme="dark"] [data-skill="linkedin"] { --brand: #0A66C2; }
+:root[data-theme="dark"] [data-skill="whatsapp"] { --brand: #25D366; }
 
 @media (prefers-reduced-motion: reduce) {
   .chip-tag { transition: none; }

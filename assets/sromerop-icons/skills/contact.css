@@ -1,0 +1,98 @@
+/* ------------------------------------------------------------------
+   Contacto · iconos · sromerop
+   Requiere skills.css (de ahí salen .skill-icon y los colores --brand).
+   Se suma a tus estilos actuales de .contact-link / .k / .v.
+   ------------------------------------------------------------------ */
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-link .k {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 10rem;          /* ajústalo al ancho de tu columna de etiquetas */
+  flex-shrink: 0;
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-icon .skill-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.contact-link .v {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+.contact-arrow {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  color: var(--accent);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* hover / teclado: el icono toma el color de la marca y aparece la flecha */
+.contact-link:hover .contact-icon,
+.contact-link:focus-visible .contact-icon {
+  color: var(--brand, var(--accent));
+  border-color: color-mix(in srgb, var(--brand, var(--accent)) 45%, transparent);
+  background: color-mix(in srgb, var(--brand, var(--accent)) 16%, transparent);
+}
+
+.contact-link:hover .v,
+.contact-link:focus-visible .v {
+  color: var(--accent);
+}
+
+.contact-link:hover .contact-arrow,
+.contact-link:focus-visible .contact-arrow {
+  opacity: 1;
+  transform: none;
+}
+
+.contact-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* pantallas táctiles: sin hover, la flecha queda visible y tenue */
+@media (hover: none) {
+  .contact-arrow { opacity: 0.55; transform: none; }
+}
+
+/* móvil: etiqueta arriba, valor debajo alineado con el texto de la etiqueta */
+@media (max-width: 480px) {
+  .contact-link { flex-wrap: wrap; row-gap: 0.35rem; }
+  .contact-link .k { width: 100%; }
+  .contact-link .v { padding-left: 2.75rem; }
+  .contact-arrow { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-icon,
+  .contact-arrow,
+  .contact-link .v { transition: none; }
+}
