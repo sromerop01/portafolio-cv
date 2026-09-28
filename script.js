@@ -36,6 +36,8 @@ function scramble(element, delay) {
   noise.textContent = scrambleText(text, 0);
 
   element.replaceChildren(ghost, noise);
+  // Ya hay caracteres aleatorios: el CSS deja de ocultar el elemento
+  element.setAttribute('data-scramble-ready', '');
 
   const start = performance.now() + delay;
   const timer = setInterval(() => {
@@ -53,10 +55,16 @@ function scramble(element, delay) {
 }
 
 function initScramble() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const elements = document.querySelectorAll('[data-scramble]');
+
+  // Sin animación: el texto final se muestra de inmediato
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    elements.forEach((element) => element.setAttribute('data-scramble-ready', ''));
+    return;
+  }
 
   // En orden del documento: eyebrow (0 ms) y rol (120 ms)
-  document.querySelectorAll('[data-scramble]').forEach((element, index) => {
+  elements.forEach((element, index) => {
     scramble(element, index * SCRAMBLE_STAGGER_MS);
   });
 }

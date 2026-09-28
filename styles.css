@@ -370,6 +370,20 @@ img {
   position: relative;
 }
 
+/* Con JS (clase .js desde el <head>), el texto se oculta hasta que script.js arma la capa de
+   caracteres aleatorios: así nunca se ve el texto final antes del scramble.
+   Si script.js no llega a cargar, esta animación lo muestra a los 2 s. */
+.js [data-scramble]:not([data-scramble-ready]) {
+  visibility: hidden;
+  animation: scramble-fallback 0s 2s forwards;
+}
+
+@keyframes scramble-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
 .scramble__ghost {
   opacity: 0;
 }
@@ -378,6 +392,14 @@ img {
   position: absolute;
   inset: 0;
   overflow: hidden;
+}
+
+/* --- Por debajo del escritorio: credencial centrada en su columna --- */
+
+@media (width < 960px) {
+  .credential {
+    justify-self: center;
+  }
 }
 
 /* --- Escritorio: dos columnas (texto a la izquierda, credencial a la derecha) --- */
@@ -715,6 +737,7 @@ img {
 
 /* Marcador "›" en --accent. El texto alternativo vacío ("") hace que los lectores de pantalla no lo lean. */
 .job__task::before {
+  content: "›"; /* respaldo para navegadores que no entienden el texto alternativo de abajo */
   content: "›" / "";
   position: absolute;
   left: 0;
@@ -922,25 +945,42 @@ img {
    - marquee-brake (freno): se suma a la anterior y avanza 1 juego en sentido contrario en 2/3 del
      ciclo, es decir, al 75 % de su velocidad. Solo corre con el cursor encima, así que la fila baja
      al 25 % de su velocidad; al salir queda pausado donde iba y la fila no salta.
-   Entre las dos se desplazan como mucho 3 juegos: los 2 que sobran cubren siempre el ancho de la fila. */
+   Entre las dos se desplazan como mucho 3 juegos: los 2 que sobran cubren siempre el ancho de la fila.
+   Base (navegadores sin animation-composition): solo la animación principal, que se pausa con el cursor. */
 .marquee__track {
   display: flex;
   gap: 0.6rem;
   width: max-content;
   padding-right: 0.6rem;
-  animation: marquee 30s linear infinite, marquee-brake calc(30s / 1.5) linear infinite paused;
-  animation-composition: replace, add;
+  animation: marquee 30s linear infinite;
 }
 
-/* Fila 2: hacia la derecha (y su freno, hacia la izquierda) */
+/* Fila 2: hacia la derecha */
 .marquee__row--reverse .marquee__track {
-  animation-duration: 34s, calc(34s / 1.5);
+  animation-duration: 34s;
   animation-direction: reverse;
 }
 
-/* Con el cursor encima corre el freno: ambas filas van más lento, sin detenerse */
 .marquee:hover .marquee__track {
-  animation-play-state: running;
+  animation-play-state: paused;
+}
+
+/* Con animation-composition: el freno se suma a la animación principal */
+@supports (animation-composition: add) {
+  .marquee__track {
+    animation: marquee 30s linear infinite, marquee-brake calc(30s / 1.5) linear infinite paused;
+    animation-composition: replace, add;
+  }
+
+  /* Fila 2: hacia la derecha (y su freno, hacia la izquierda) */
+  .marquee__row--reverse .marquee__track {
+    animation-duration: 34s, calc(34s / 1.5);
+  }
+
+  /* Con el cursor encima corre el freno: ambas filas van más lento, sin detenerse */
+  .marquee:hover .marquee__track {
+    animation-play-state: running;
+  }
 }
 
 @keyframes marquee {

@@ -11,9 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
   <!-- La flecha ↗ de los enlaces no está en los subconjuntos anteriores: se pide aparte (solo ese carácter) -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97&display=swap" rel="stylesheet">
+  <!-- Marca que hay JS: el CSS oculta el texto del scramble hasta que script.js lo arma, así nunca se ve el texto final antes -->
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="styles.css">
-  <!-- blocking="render": no se pinta nada hasta que corre el script, así el scramble arranca desde caracteres aleatorios -->
-  <script src="script.js" defer blocking="render"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <main>
@@ -395,7 +396,7 @@
           </li>
           <li class="card language">
             <p class="language__name">Inglés técnico</p>
-            <p class="language__level">B1</p>
+            <p class="language__level">B2</p>
           </li>
         </ul>
       </div>
