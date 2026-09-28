@@ -5,7 +5,7 @@ Portafolio y hoja de vida web de Santiago Romero Porras, Ingeniero Mecánico for
 ## Secciones
 
 | # | Sección | Contenido |
-|---|---------|-----------|
+| --- | --- | --- |
 | — | Inicio | Presentación, credencial con foto y botones de contacto y proyectos |
 | 01 | Perfil | Resumen profesional y línea de tiempo de formación |
 | 02 | Experiencia | Cargo actual y responsabilidades |
@@ -13,7 +13,7 @@ Portafolio y hoja de vida web de Santiago Romero Porras, Ingeniero Mecánico for
 | 04 | Habilidades | Marquee con el stack y tabla por área |
 | 05 | Certificaciones | Certificaciones cloud |
 | 06 | Educación e idiomas | Carreras e idiomas |
-| 07 | Contacto | Correo, LinkedIn y GitHub |
+| 07 | Contacto | Correo, teléfono, LinkedIn y GitHub |
 
 ## Tecnologías
 
@@ -21,22 +21,16 @@ HTML, CSS y JavaScript, sin frameworks, librerías ni proceso de compilación. E
 
 ## Estructura
 
-```
+```text
 index.html            Contenido de todas las secciones
 styles.css            Estilos (paleta y fuentes como variables en :root)
 script.js             Efecto scramble del Inicio y brillo/inclinación de las tarjetas de Proyectos
 assets/img/perfil.jpeg
 ```
 
-## Cómo verlo
+## Live demo
 
-Abre `index.html` en el navegador, o sírvelo localmente:
-
-```bash
-python3 -m http.server 8000
-```
-
-y entra a <http://localhost:8000>.
+Puedes verlo aquí: <https://sromerop.sales-control.com/>
 
 ## Detalles
 
