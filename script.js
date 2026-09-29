@@ -4,10 +4,10 @@
 
 // --- Efecto scramble del eyebrow y el rol ---
 
-const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>-_/\\[]{}#*+=';
-const SCRAMBLE_STEP_MS = 22;       // cada paso dura 22 ms...
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>-_/\\[]{}#*+=";
+const SCRAMBLE_STEP_MS = 22; // cada paso dura 22 ms...
 const SCRAMBLE_CHARS_PER_STEP = 2; // ...y revela 2 caracteres más
-const SCRAMBLE_STAGGER_MS = 120;   // cada texto arranca 120 ms después del anterior
+const SCRAMBLE_STAGGER_MS = 120; // cada texto arranca 120 ms después del anterior
 
 function randomChar() {
   return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
@@ -16,8 +16,8 @@ function randomChar() {
 // Los primeros `revealed` caracteres son los reales; el resto, aleatorios (los espacios se conservan).
 function scrambleText(text, revealed) {
   return Array.from(text, (char, i) =>
-    i < revealed || char === ' ' ? char : randomChar()
-  ).join('');
+    i < revealed || char === " " ? char : randomChar(),
+  ).join("");
 }
 
 function scramble(element, delay) {
@@ -25,19 +25,19 @@ function scramble(element, delay) {
 
   // El texto real sigue en su sitio pero invisible: reserva el espacio exacto
   // (nada se desplaza) y los lectores de pantalla lo siguen leyendo.
-  const ghost = document.createElement('span');
-  ghost.className = 'scramble__ghost';
+  const ghost = document.createElement("span");
+  ghost.className = "scramble__ghost";
   ghost.textContent = text;
 
   // Capa superpuesta con los caracteres aleatorios.
-  const noise = document.createElement('span');
-  noise.className = 'scramble__noise';
-  noise.setAttribute('aria-hidden', 'true');
+  const noise = document.createElement("span");
+  noise.className = "scramble__noise";
+  noise.setAttribute("aria-hidden", "true");
   noise.textContent = scrambleText(text, 0);
 
   element.replaceChildren(ghost, noise);
   // Ya hay caracteres aleatorios: el CSS deja de ocultar el elemento
-  element.setAttribute('data-scramble-ready', '');
+  element.setAttribute("data-scramble-ready", "");
 
   const start = performance.now() + delay;
   const timer = setInterval(() => {
@@ -55,11 +55,13 @@ function scramble(element, delay) {
 }
 
 function initScramble() {
-  const elements = document.querySelectorAll('[data-scramble]');
+  const elements = document.querySelectorAll("[data-scramble]");
 
   // Sin animación: el texto final se muestra de inmediato
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    elements.forEach((element) => element.setAttribute('data-scramble-ready', ''));
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    elements.forEach((element) =>
+      element.setAttribute("data-scramble-ready", ""),
+    );
     return;
   }
 
@@ -72,16 +74,16 @@ function initScramble() {
 // --- Fallback de la foto de la credencial: si no carga, se ocultan la imagen y el ícono roto y quedan las iniciales ---
 
 function initPhotoFallback() {
-  const photo = document.querySelector('.credential__img');
+  const photo = document.querySelector(".credential__img");
   if (!photo) return;
 
-  const showInitials = () => photo.classList.add('is-broken');
+  const showInitials = () => photo.classList.add("is-broken");
 
   // Si la foto falló antes de que corriera este script, el evento 'error' ya pasó.
   if (photo.complete && photo.naturalWidth === 0) {
     showInitials();
   } else {
-    photo.addEventListener('error', showInitials, { once: true });
+    photo.addEventListener("error", showInitials, { once: true });
   }
 }
 
@@ -100,17 +102,21 @@ const TILT_Y_DEG = 9; // rotateY = (x − 0.5) × 9° → máximo ±4.5°
 const clamp01 = (value) => Math.min(Math.max(value, 0), 1);
 
 function initProjectCards() {
-  const finePointer = window.matchMedia('(pointer: fine)');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = window.matchMedia("(pointer: fine)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // Los eventos van en la celda, que no se transforma: sus medidas no cambian cuando la tarjeta se inclina.
-  document.querySelectorAll('.projects__cell').forEach((cell) => {
-    const card = cell.querySelector('.project');
+  document.querySelectorAll(".projects__cell").forEach((cell) => {
+    const card = cell.querySelector(".project");
 
     const follow = (event) => {
       // Las condiciones se revisan en cada evento: si cambian con la página abierta, el efecto se apaga
-      if (event.pointerType !== 'mouse' || !finePointer.matches || reducedMotion.matches) {
-        card.classList.remove('is-hovered');
+      if (
+        event.pointerType !== "mouse" ||
+        !finePointer.matches ||
+        reducedMotion.matches
+      ) {
+        card.classList.remove("is-hovered");
         return;
       }
 
@@ -119,16 +125,18 @@ function initProjectCards() {
       const x = clamp01((event.clientX - rect.left) / rect.width);
       const y = clamp01((event.clientY - rect.top) / rect.height);
 
-      card.style.setProperty('--mx', `${x * 100}%`);
-      card.style.setProperty('--my', `${y * 100}%`);
-      card.style.setProperty('--rx', `${(0.5 - y) * TILT_X_DEG}deg`);
-      card.style.setProperty('--ry', `${(x - 0.5) * TILT_Y_DEG}deg`);
-      card.classList.add('is-hovered');
+      card.style.setProperty("--mx", `${x * 100}%`);
+      card.style.setProperty("--my", `${y * 100}%`);
+      card.style.setProperty("--rx", `${(0.5 - y) * TILT_X_DEG}deg`);
+      card.style.setProperty("--ry", `${(x - 0.5) * TILT_Y_DEG}deg`);
+      card.classList.add("is-hovered");
     };
 
-    cell.addEventListener('pointerenter', follow);
-    cell.addEventListener('pointermove', follow);
-    cell.addEventListener('pointerleave', () => card.classList.remove('is-hovered'));
+    cell.addEventListener("pointerenter", follow);
+    cell.addEventListener("pointermove", follow);
+    cell.addEventListener("pointerleave", () =>
+      card.classList.remove("is-hovered"),
+    );
   });
 }
 

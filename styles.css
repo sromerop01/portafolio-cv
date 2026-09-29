@@ -57,6 +57,16 @@ img {
   position: absolute;
 }
 
+/* Texto solo para lectores de pantalla (p. ej. "se abre en una pestaña nueva") */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .accent {
   color: var(--accent);
 }
@@ -72,7 +82,8 @@ img {
 .hero {
   position: relative;
   display: grid;
-  grid-template-rows: 1fr auto; /* contenido | divisor */
+  grid-template-rows: 1fr auto;
+  /* contenido | divisor */
   min-height: 100vh;
   min-height: 100svh;
   padding-block: 3rem 1.5rem;
@@ -410,7 +421,7 @@ img {
 
 /* --- Escritorio: dos columnas (texto a la izquierda, credencial a la derecha) --- */
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .hero {
     padding-block: 5rem 2rem;
   }
@@ -456,7 +467,7 @@ img {
 }
 
 /* Entre dos secciones seguidas no se suman los paddings: queda solo el inferior de la primera */
-.section + .section {
+.section+.section {
   padding-top: 0;
 }
 
@@ -498,7 +509,7 @@ img {
   background-color: var(--surface);
 }
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .container {
     width: min(100% - 6rem, 75rem);
   }
@@ -672,7 +683,7 @@ img {
 
 /* --- Escritorio: dos columnas alineadas arriba (≈60 % ventana, 40 % línea de tiempo) --- */
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .profile__grid {
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     align-items: start;
@@ -743,7 +754,8 @@ img {
 
 /* Marcador "›" en --accent. El texto alternativo vacío ("") hace que los lectores de pantalla no lo lean. */
 .job__task::before {
-  content: "›"; /* respaldo para navegadores que no entienden el texto alternativo de abajo */
+  content: "›";
+  /* respaldo para navegadores que no entienden el texto alternativo de abajo */
   content: "›" / "";
   position: absolute;
   left: 0;
@@ -752,7 +764,7 @@ img {
 
 /* --- Escritorio: datos del cargo a la izquierda (35 %) y responsabilidades a la derecha (65 %) --- */
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .job {
     grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
   }
@@ -913,7 +925,7 @@ img {
 
 /* --- Escritorio: 2 columnas × 3 filas (5 proyectos + tarjeta final) --- */
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .projects__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -925,8 +937,8 @@ img {
 
 /* ==========================================================================
    Colores de marca por tecnología (--brand)
-   Los toma cualquier elemento con data-skill (chips del marquee y, más adelante,
-   Contacto). Valores para fondo oscuro. Sin --brand (p. ej. sql) se usa --accent.
+   Los toma cualquier elemento con data-skill (chips del marquee y filas de Contacto).
+   Valores para fondo oscuro. Sin --brand (p. ej. sql o Email) se usa --accent.
    ========================================================================== */
 
 [data-skill="java"] {
@@ -980,6 +992,18 @@ img {
 
 [data-skill="vscode"] {
   --brand: #007ACC;
+}
+
+[data-skill="whatsapp"] {
+  --brand: #25D366;
+}
+
+[data-skill="linkedin"] {
+  --brand: #0A66C2;
+}
+
+[data-skill="github"] {
+  --brand: var(--text);
 }
 
 /* ==========================================================================
@@ -1195,6 +1219,7 @@ img {
 /* Móvil: cada fila se apila (categoría arriba, tecnologías debajo). Al cambiar el display,
    los role="table/row/rowheader/cell" del HTML mantienen la semántica de tabla. */
 @media (width < 960px) {
+
   .specs,
   .specs__label,
   .specs tbody,
@@ -1255,7 +1280,7 @@ img {
 
 /* --- Escritorio: certificaciones en 2 columnas iguales --- */
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .certs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1336,7 +1361,7 @@ img {
 
 /* --- Escritorio: cada carrera en una fila (título ····· institución · fechas) --- */
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .degree {
     flex-direction: row;
     align-items: baseline;
@@ -1364,23 +1389,37 @@ img {
   line-height: 1.35;
 }
 
-/* Lista etiqueta | valor, con líneas de 1px entre filas.
-   Móvil: etiqueta arriba y valor debajo. */
+/* Lista de enlaces, con líneas de 1px entre filas */
 .contact__list {
   margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.contact__row {
-  display: grid;
-  gap: 0.25rem;
-  padding-block: 1.5rem;
-}
-
-.contact__row + .contact__row {
+.contact__item+.contact__item {
   border-top: 1px solid var(--border);
 }
 
+/* Cada fila es un solo enlace: toda el área es clicable.
+   Móvil: etiqueta con ícono arriba y valor debajo; sin flecha. */
+.contact__link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  padding-block: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact__link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .contact__label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.5;
@@ -1389,25 +1428,99 @@ img {
   color: var(--text-muted);
 }
 
-.contact__value {
-  margin: 0;
-  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
-  line-height: 1.4;
-}
-
-.contact__link {
-  color: var(--text);
-  text-decoration: none;
+/* Caja del ícono: 32px con --accent al 10 %; el ícono (16px) toma su color (currentColor) */
+.contact__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
   transition: color 0.2s;
 }
 
-.contact__link:hover {
+.contact__icon .icon {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Sangría = caja del ícono (2rem) + gap de la etiqueta (0.75rem): el valor queda alineado con el texto de la etiqueta */
+.contact__value {
+  padding-left: 2.75rem;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  transition: color 0.2s;
+}
+
+/* Flecha decorativa: solo en escritorio (ver media query) y visible con hover o teclado */
+.contact__arrow {
+  display: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Hover y teclado: el ícono toma el color de marca (--accent si no tiene, como Email),
+   el valor pasa a --accent y aparece la flecha */
+.contact__link:hover .contact__icon,
+.contact__link:focus-visible .contact__icon {
+  color: var(--brand, var(--accent));
+}
+
+.contact__link:hover .contact__value,
+.contact__link:focus-visible .contact__value {
   color: var(--accent);
 }
 
-.contact__link:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+.contact__link:hover .contact__arrow,
+.contact__link:focus-visible .contact__arrow {
+  opacity: 1;
+}
+
+/* Pantallas táctiles (sin hover): la flecha queda siempre visible y tenue */
+@media (hover: none) {
+  .contact__arrow {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .contact__icon,
+  .contact__value,
+  .contact__arrow {
+    transition: none;
+  }
+}
+
+/* --- Escritorio: etiqueta con ícono (12.5rem) | valor | flecha al final de la fila --- */
+
+@media (width >=960px) {
+  .contact__list {
+    margin-top: 3.5rem;
+  }
+
+  .contact__link {
+    grid-template-columns: 12.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0 1.5rem;
+    padding-block: 2rem;
+  }
+
+  .contact__value {
+    padding-left: 0;
+  }
+
+  .contact__arrow {
+    display: block;
+  }
 }
 
 /* ==========================================================================
@@ -1432,19 +1545,4 @@ img {
 
 .site-footer__inner p {
   margin: 0;
-}
-
-/* --- Escritorio: etiqueta y valor en la misma fila --- */
-
-@media (width >= 960px) {
-  .contact__list {
-    margin-top: 3.5rem;
-  }
-
-  .contact__row {
-    grid-template-columns: 12.5rem minmax(0, 1fr);
-    align-items: baseline;
-    gap: 0 1.5rem;
-    padding-block: 2rem;
-  }
 }
