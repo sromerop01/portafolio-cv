@@ -31,18 +31,20 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap"
     rel="stylesheet">
-  <!-- La flecha ↗ de los enlaces no está en los subconjuntos anteriores: se pide aparte (solo ese carácter) -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97&display=swap"
+  <!-- Las flechas ↗ y ↑ no están en los subconjuntos anteriores: se piden aparte (solo esos caracteres) -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97%E2%86%91&display=swap"
     rel="stylesheet">
   <!-- Marca que hay JS: el CSS oculta el texto del scramble hasta que script.js lo arma, así nunca se ve el texto final antes -->
   <script>document.documentElement.classList.add('js');</script>
   <!-- ?v=: el CDN del hosting guarda styles.css y script.js en caché (index.html no). Al desplegar cambios en
        alguno de los dos, cambiar la versión para que se descargue el archivo nuevo y no la copia vieja -->
-  <link rel="stylesheet" href="styles.css?v=20260929-2">
-  <script src="script.js?v=20260929" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260929b">
+  <script src="script.js?v=20260929b" defer></script>
 </head>
 
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
   <!-- Íconos de Habilidades y Contacto, copiados de assets/sromerop-icons/skills/skills-sprite.svg. Van incrustados porque un
        <use> que apunta a un .svg externo no carga al abrir la página como archivo (file://) -->
   <svg class="icon-sprite" width="0" height="0" aria-hidden="true">
@@ -164,7 +166,28 @@
     </symbol>
   </svg>
 
-  <main>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="#hero">SRP · <span class="site-header__id">N.º 2026-02</span></a>
+
+      <!-- Solo por debajo de 960px y con JS (ver styles.css); script.js lo abre y cierra -->
+      <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menú</button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+        <ul class="site-nav__list" role="list">
+          <li class="site-nav__item"><a class="site-nav__link" href="#profile">Perfil</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="#experience">Experiencia</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="#projects">Proyectos</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="#skills">Habilidades</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="#certs">Certificaciones</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="#education">Educación</a></li>
+          <li class="site-nav__item"><a class="site-nav__link" href="#contact">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <p class="hero__coords" aria-hidden="true">
         <span>6.2442° N</span>
@@ -873,6 +896,7 @@
     <div class="container site-footer__inner">
       <p>Santiago Romero Porras · Medellín, Colombia</p>
       <p>2026</p>
+      <a class="site-footer__top" href="#hero">Volver arriba <span aria-hidden="true">↑</span></a>
     </div>
   </footer>
 </body>

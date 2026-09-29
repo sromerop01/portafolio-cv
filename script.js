@@ -141,3 +141,89 @@ function initProjectCards() {
 }
 
 initProjectCards();
+
+/* ==========================================================================
+   Header fijo y navegación
+   ========================================================================== */
+
+// --- Menú móvil (por debajo de 960px) y resaltado de la sección visible ---
+
+function initNav() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  const toggle = header.querySelector(".site-nav__toggle");
+  const links = [...header.querySelectorAll(".site-nav__link")];
+  const sections = links.map((link) => document.querySelector(link.hash));
+  const footer = document.querySelector(".site-footer");
+  const desktop = window.matchMedia("(width >= 960px)");
+
+  // Menú: el botón abre y cierra el panel; un enlace o Esc lo cierran (Esc devuelve el foco al botón)
+  const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+  const setOpen = (open) => {
+    header.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "Cerrar" : "Menú";
+  };
+
+  toggle.addEventListener("click", () => setOpen(!isOpen()));
+  links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen()) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // Sección visible: la de más arriba que cruza una franja que empieza un poco más abajo de donde se detiene
+  // un título al llegar desde un enlace (header + 16px) y termina a mitad de la ventana. Con el pie completo
+  // a la vista (final de la página) se marca la última: Contacto no alcanza a subir hasta la franja.
+  const visible = new Set();
+  let atBottom = false;
+
+  const highlight = () => {
+    const current = atBottom
+      ? sections.at(-1)
+      : sections.find((section) => visible.has(section));
+
+    links.forEach((link, i) => {
+      if (sections[i] === current) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  let sectionObserver;
+  const observeSections = () => {
+    sectionObserver?.disconnect();
+    visible.clear();
+    sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        });
+        highlight();
+      },
+      { rootMargin: `-${header.offsetHeight + 24}px 0px -50% 0px` },
+    );
+    sections.forEach((section) => sectionObserver.observe(section));
+  };
+
+  new IntersectionObserver(
+    ([entry]) => {
+      atBottom = entry.intersectionRatio >= 0.99;
+      highlight();
+    },
+    { threshold: 0.99 },
+  ).observe(footer);
+
+  observeSections();
+
+  // Al cruzar los 960px cambia el alto del header (la franja se recalcula) y el panel del menú desaparece
+  desktop.addEventListener("change", () => {
+    setOpen(false);
+    observeSections();
+  });
+}
+
+initNav();

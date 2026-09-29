@@ -20,7 +20,16 @@
   --rx: 0deg;
   --ry: 0deg;
 
+  /* Alto del header fijo (56px en móvil, 64px en escritorio): lo usan el header, el Inicio y los scroll-margin */
+  --header-h: 56px;
+
   color-scheme: dark;
+}
+
+@media (width >=960px) {
+  :root {
+    --header-h: 64px;
+  }
 }
 
 /* ==========================================================================
@@ -71,6 +80,208 @@ img {
   color: var(--accent);
 }
 
+/* Desplazamiento suave al seguir un enlace interno; con "reducir movimiento" el salto es inmediato */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Al llegar desde un enlace, cada sección (y <main>, destino de "Saltar al contenido") queda 16px debajo del header */
+section[id],
+#contenido {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+/* ==========================================================================
+   Header fijo y navegación
+   ========================================================================== */
+
+/* "Saltar al contenido": fuera de la pantalla hasta recibir foco con el teclado */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 20;
+  padding: 0.75rem 1rem;
+  background-color: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* Queda arriba al hacer scroll: --bg al 85 % y desenfoque de lo que pasa por debajo */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--header-h);
+  border-bottom: 1px solid var(--border);
+  background-color: rgba(10, 17, 32, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Mismo ancho que las secciones (.container): marca a la izquierda; enlaces o botón "Menú" a la derecha */
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+/* line-height de 44px: área táctil cómoda (con flex se perdería el espacio entre "SRP ·" y el <span>) */
+.site-header__brand {
+  display: inline-block;
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 44px;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header__id {
+  color: var(--text-muted);
+}
+
+.site-nav__list {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Al menos 44px de alto: área táctil cómoda */
+.site-nav__link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  color: var(--text);
+}
+
+/* Sección visible (script.js le pone aria-current="true"): --accent con una línea de 2px debajo */
+.site-nav__link[aria-current="true"] {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+/* Botón "Menú" / "Cerrar": solo por debajo de 960px y con JS (ver media query) */
+.site-nav__toggle {
+  display: none;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.site-nav__toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-header__brand:focus-visible,
+.site-nav__link:focus-visible,
+.site-nav__toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav__link {
+    transition: none;
+  }
+}
+
+/* --- Por debajo de 960px sin JS: los enlaces en una fila con scroll horizontal dentro del header --- */
+
+@media (width < 960px) {
+  .site-nav {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* --- Con JS: los enlaces pasan a un panel de todo el ancho bajo el header, que abre el botón "Menú" --- */
+
+  .js .site-nav__toggle {
+    display: inline-flex;
+  }
+
+  .js .site-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    left: 0;
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100svh - var(--header-h));
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg);
+  }
+
+  .js .site-header.is-open .site-nav {
+    display: block;
+  }
+
+  .js .site-nav__list {
+    flex-direction: column;
+    gap: 0;
+    width: min(100% - 2rem, 75rem);
+    margin-inline: auto;
+  }
+
+  .js .site-nav__item+.site-nav__item {
+    border-top: 1px solid var(--border);
+  }
+
+  .js .site-nav__link {
+    min-height: 48px;
+  }
+}
+
 /* ==========================================================================
    Sección Inicio (#hero)
    ========================================================================== */
@@ -84,8 +295,9 @@ img {
   display: grid;
   grid-template-rows: 1fr auto;
   /* contenido | divisor */
-  min-height: 100vh;
-  min-height: 100svh;
+  /* Alto de la ventana menos el header fijo (con respaldo en vh para navegadores sin svh) */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
   padding-block: 3rem 1.5rem;
 }
 
@@ -1531,10 +1743,11 @@ img {
   padding-block: 2rem 3rem;
 }
 
-/* Nombre y ciudad a la izquierda, año a la derecha (en móvil el año baja si no cabe) */
+/* Nombre y ciudad a la izquierda; año y "Volver arriba" a la derecha (en móvil bajan si no caben) */
 .site-footer__inner {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   justify-content: space-between;
   gap: 0.5rem 1.5rem;
   font-family: var(--font-mono);
@@ -1545,4 +1758,31 @@ img {
 
 .site-footer__inner p {
   margin: 0;
+}
+
+.site-footer__inner p:first-child {
+  margin-right: auto;
+}
+
+.site-footer__top {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-footer__top:hover,
+.site-footer__top:focus-visible {
+  color: var(--accent);
+}
+
+.site-footer__top:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__top {
+    transition: none;
+  }
 }
