@@ -1107,6 +1107,7 @@ img {
   background-color: color-mix(in srgb, var(--brand, var(--accent)) 16%, transparent);
 }
 
+/* Tamaño real del ícono. Los width/height="17" del HTML son solo respaldo: sin este CSS, un <svg> mediría 300 × 150 */
 .skill-icon {
   display: block;
   flex: none;

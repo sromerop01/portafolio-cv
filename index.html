@@ -36,8 +36,10 @@
     rel="stylesheet">
   <!-- Marca que hay JS: el CSS oculta el texto del scramble hasta que script.js lo arma, así nunca se ve el texto final antes -->
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <!-- ?v=: el CDN del hosting guarda styles.css y script.js en caché (index.html no). Al desplegar cambios en
+       alguno de los dos, cambiar la versión para que se descargue el archivo nuevo y no la copia vieja -->
+  <link rel="stylesheet" href="styles.css?v=20260929">
+  <script src="script.js?v=20260929" defer></script>
 </head>
 
 <body>
@@ -312,82 +314,82 @@
         <div class="marquee" aria-hidden="true">
           <div class="marquee__row">
             <div class="marquee__track">
-              <span class="chip" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
-              <span class="chip" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
-              <span class="chip" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
-              <span class="chip" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
-              <span class="chip" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
-              <span class="chip" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
-              <span class="chip" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
+              <span class="chip" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
+              <span class="chip" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
+              <span class="chip" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
+              <span class="chip" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
+              <span class="chip" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
+              <span class="chip" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
+              <span class="chip" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
               <!-- Copias para el loop sin saltos (ocultas con reduced motion) -->
-              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
-              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
-              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
-              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
-              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
-              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
-              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
-              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
-              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
-              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
-              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
-              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
-              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
-              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
-              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
-              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
-              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
-              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
-              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
-              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
-              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
-              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
-              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
-              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
-              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
-              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
-              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
-              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
+              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
+              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
+              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
+              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
+              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
+              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
+              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
+              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
+              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
+              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
+              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
+              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
+              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
+              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
+              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
+              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
+              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
+              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
+              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
+              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
+              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
+              <span class="chip is-clone" data-skill="java"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-java"></use></svg></span>Java</span>
+              <span class="chip is-clone" data-skill="php"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-php"></use></svg></span>PHP</span>
+              <span class="chip is-clone" data-skill="laravel"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-laravel"></use></svg></span>Laravel</span>
+              <span class="chip is-clone" data-skill="react"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-react"></use></svg></span>React</span>
+              <span class="chip is-clone" data-skill="typescript"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-typescript"></use></svg></span>TypeScript</span>
+              <span class="chip is-clone" data-skill="nextjs"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-nextjs"></use></svg></span>Next.js</span>
+              <span class="chip is-clone" data-skill="sql"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-sql"></use></svg></span>SQL</span>
             </div>
           </div>
           <div class="marquee__row marquee__row--reverse">
             <div class="marquee__track">
-              <span class="chip" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
-              <span class="chip" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
-              <span class="chip" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
-              <span class="chip" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
-              <span class="chip" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
-              <span class="chip" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
-              <span class="chip" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
+              <span class="chip" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
+              <span class="chip" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
+              <span class="chip" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
+              <span class="chip" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
+              <span class="chip" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
+              <span class="chip" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
+              <span class="chip" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
               <!-- Copias para el loop sin saltos (ocultas con reduced motion) -->
-              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
-              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
-              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
-              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
-              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
-              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
-              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
-              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
-              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
-              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
-              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
-              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
-              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
-              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
-              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
-              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
-              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
-              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
-              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
-              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
-              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
-              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
-              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
-              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
-              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
-              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
-              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
-              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
+              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
+              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
+              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
+              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
+              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
+              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
+              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
+              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
+              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
+              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
+              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
+              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
+              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
+              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
+              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
+              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
+              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
+              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
+              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
+              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
+              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
+              <span class="chip is-clone" data-skill="aws"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-aws"></use></svg></span>AWS</span>
+              <span class="chip is-clone" data-skill="gcp"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-gcp"></use></svg></span>GCP</span>
+              <span class="chip is-clone" data-skill="terraform"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-terraform"></use></svg></span>Terraform</span>
+              <span class="chip is-clone" data-skill="docker"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-docker"></use></svg></span>Docker</span>
+              <span class="chip is-clone" data-skill="git"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-git"></use></svg></span>Git</span>
+              <span class="chip is-clone" data-skill="postman"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-postman"></use></svg></span>Postman</span>
+              <span class="chip is-clone" data-skill="vscode"><span class="chip__abbr"><svg class="skill-icon" width="17" height="17" aria-hidden="true" focusable="false"><use href="#i-vscode"></use></svg></span>VS Code</span>
             </div>
           </div>
         </div>
