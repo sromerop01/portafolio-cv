@@ -51,6 +51,12 @@ img {
   max-width: 100%;
 }
 
+/* Símbolos de íconos incrustados al inicio del <body>: fuera del flujo para que no ocupen una línea.
+   (El atributo hidden no sirve: solo oculta elementos HTML, no SVG) */
+.icon-sprite {
+  position: absolute;
+}
+
 .accent {
   color: var(--accent);
 }
@@ -918,6 +924,65 @@ img {
 }
 
 /* ==========================================================================
+   Colores de marca por tecnología (--brand)
+   Los toma cualquier elemento con data-skill (chips del marquee y, más adelante,
+   Contacto). Valores para fondo oscuro. Sin --brand (p. ej. sql) se usa --accent.
+   ========================================================================== */
+
+[data-skill="java"] {
+  --brand: #E76F00;
+}
+
+[data-skill="php"] {
+  --brand: #777BB4;
+}
+
+[data-skill="laravel"] {
+  --brand: #FF2D20;
+}
+
+[data-skill="react"] {
+  --brand: #61DAFB;
+}
+
+[data-skill="typescript"] {
+  --brand: #3178C6;
+}
+
+[data-skill="nextjs"] {
+  --brand: var(--text);
+}
+
+[data-skill="aws"] {
+  --brand: #FF9900;
+}
+
+[data-skill="gcp"] {
+  --brand: #4285F4;
+}
+
+/* Original #844FBA, aclarado para contraste ≥ 3:1 sobre el fondo del chip */
+[data-skill="terraform"] {
+  --brand: #905FC0;
+}
+
+[data-skill="docker"] {
+  --brand: #2496ED;
+}
+
+[data-skill="git"] {
+  --brand: #F03C2E;
+}
+
+[data-skill="postman"] {
+  --brand: #FF6C37;
+}
+
+[data-skill="vscode"] {
+  --brand: #007ACC;
+}
+
+/* ==========================================================================
    Sección Habilidades (#skills)
    ========================================================================== */
 
@@ -1024,7 +1089,7 @@ img {
   transform: translateY(-2px);
 }
 
-/* Abreviatura: cuadro de 27px con --accent al 15 % */
+/* Cuadro del ícono: 27px con --accent al 15 %; el ícono toma su color (currentColor) */
 .chip__abbr {
   display: grid;
   place-items: center;
@@ -1032,9 +1097,27 @@ img {
   height: 27px;
   border-radius: 6px;
   background-color: color-mix(in srgb, var(--accent) 15%, transparent);
-  font-size: 0.625rem;
-  font-weight: 700;
   color: var(--accent);
+  transition: color 0.2s, background-color 0.2s;
+}
+
+/* Con el cursor encima: color de la marca (--accent si no tiene) y su fondo al 16 % */
+.chip:hover .chip__abbr {
+  color: var(--brand, var(--accent));
+  background-color: color-mix(in srgb, var(--brand, var(--accent)) 16%, transparent);
+}
+
+.skill-icon {
+  display: block;
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip__abbr {
+    transition: none;
+  }
 }
 
 /* Sin movimiento: cada chip una sola vez, en varias líneas si no caben */
