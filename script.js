@@ -143,6 +143,47 @@ function initProjectCards() {
 initProjectCards();
 
 /* ==========================================================================
+   Sección Habilidades (#skills)
+   ========================================================================== */
+
+// --- Botón para pausar y reanudar el marquee (WCAG 2.2.2). La elección no se guarda: al recargar, se mueve ---
+
+function initMarqueeToggle() {
+  const toggle = document.querySelector(".marquee-toggle");
+  const marquee = document.querySelector(".marquee");
+  if (!toggle || !marquee) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // El botón es solo ícono (barras o triángulo, según .is-paused): su nombre accesible es el aria-label
+  const setPaused = (paused) => {
+    marquee.classList.toggle("is-paused", paused);
+    toggle.classList.toggle("is-paused", paused);
+    toggle.setAttribute(
+      "aria-label",
+      paused
+        ? "Reanudar el movimiento de las habilidades"
+        : "Pausar el movimiento de las habilidades",
+    );
+  };
+
+  // Con "reducir movimiento" las filas ya están quietas: el botón se oculta y se quita la pausa.
+  // Se revisa también si el usuario cambia la preferencia con la página abierta.
+  const update = () => {
+    if (reducedMotion.matches) setPaused(false);
+    toggle.hidden = reducedMotion.matches;
+  };
+
+  toggle.addEventListener("click", () =>
+    setPaused(!marquee.classList.contains("is-paused")),
+  );
+  reducedMotion.addEventListener("change", update);
+  update();
+}
+
+initMarqueeToggle();
+
+/* ==========================================================================
    Header fijo y navegación
    ========================================================================== */
 
@@ -160,10 +201,10 @@ function initNav() {
 
   // Menú: el botón abre y cierra el panel; un enlace o Esc lo cierran (Esc devuelve el foco al botón)
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+  // El botón es solo ícono: aria-expanded cambia las tres líneas por la X (ver styles.css) y lo anuncia
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "Cerrar" : "Menú";
   };
 
   toggle.addEventListener("click", () => setOpen(!isOpen()));

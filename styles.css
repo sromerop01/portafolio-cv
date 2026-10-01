@@ -195,19 +195,61 @@ section[id],
   text-underline-offset: 6px;
 }
 
-/* Botón "Menú" / "Cerrar": solo por debajo de 960px y con JS (ver media query) */
+/* Botón del menú: solo por debajo de 960px y con JS (ver media query). Solo ícono, en un cuadrado de 44px */
 .site-nav__toggle {
   display: none;
   align-items: center;
-  min-height: 44px;
-  padding: 0 1rem;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border: 1px solid var(--border);
   background-color: transparent;
   color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.2;
   cursor: pointer;
+}
+
+/* Ícono dibujado con CSS: tres líneas de 2px (el span y sus ::before/::after); abierto, una X */
+.site-nav__toggle-icon,
+.site-nav__toggle-icon::before,
+.site-nav__toggle-icon::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.site-nav__toggle-icon {
+  position: relative;
+}
+
+.site-nav__toggle-icon::before,
+.site-nav__toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.site-nav__toggle-icon::before {
+  top: -6px;
+}
+
+.site-nav__toggle-icon::after {
+  top: 6px;
+}
+
+.site-nav__toggle[aria-expanded="true"] .site-nav__toggle-icon {
+  background-color: transparent;
+}
+
+.site-nav__toggle[aria-expanded="true"] .site-nav__toggle-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.site-nav__toggle[aria-expanded="true"] .site-nav__toggle-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
 }
 
 .site-nav__toggle:hover {
@@ -1098,8 +1140,25 @@ section[id],
   text-decoration: none;
 }
 
+/* Enlace extendido: el ::after del enlace cubre toda su tarjeta (el ::before de .project es el brillo), así un clic
+   o toque en cualquier parte abre el enlace, que sigue siendo uno solo. Es transparente y los eventos del mouse
+   siguen llegando a .projects__cell, así que el brillo y la inclinación no cambian. */
+.project__link::after,
+.projects__more-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+}
+
+/* Foco con teclado: el contorno rodea toda la tarjeta, no solo el texto del enlace */
 .project__link:focus-visible,
 .projects__more-link:focus-visible {
+  outline: none;
+}
+
+.project__link:focus-visible::after,
+.projects__more-link:focus-visible::after {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -1112,7 +1171,9 @@ section[id],
 
 /* --- Tarjeta final "más proyectos": la misma .card, con borde punteado y sin fondo --- */
 
+/* position: relative para que el ::after de su enlace la cubra completa */
 .projects__more {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1222,6 +1283,64 @@ section[id],
    Sección Habilidades (#skills)
    ========================================================================== */
 
+/* --- Botón Pausar / Reanudar del marquee (WCAG 2.2.2): a la derecha, encima de las filas.
+   Solo ícono, en un cuadrado de 36px (44px por debajo de 960px); el nombre lo da su aria-label --- */
+
+.marquee-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 2.5rem 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+/* El display: flex de arriba le ganaría al atributo hidden: sin JS o con "reducir movimiento" no se ve */
+.marquee-toggle[hidden] {
+  display: none;
+}
+
+.marquee-toggle:hover,
+.marquee-toggle:focus-visible {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.marquee-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Ícono dibujado con CSS: dos barras de 3px (pausar) o un triángulo (reanudar) */
+.marquee-toggle__icon {
+  flex: none;
+  width: 8px;
+  height: 10px;
+  border-inline: 3px solid currentColor;
+}
+
+.marquee-toggle.is-paused .marquee-toggle__icon {
+  width: 0;
+  height: 0;
+  border-block: 5px solid transparent;
+  border-inline-start-width: 8px;
+  border-inline-end: 0;
+}
+
+@media (width < 960px) {
+  .marquee-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
 /* --- Marquee (decorativo): dos filas que se desplazan en sentidos opuestos --- */
 
 /* 0.7rem entre filas: el gap descuenta los 2px de padding superior de cada fila */
@@ -1229,6 +1348,11 @@ section[id],
   display: grid;
   gap: calc(0.7rem - 2px);
   margin-top: 2.5rem;
+}
+
+/* Con el botón visible, el espacio de arriba lo pone el botón */
+.marquee-toggle:not([hidden])+.marquee {
+  margin-top: 1rem;
 }
 
 /* Extremos desvanecidos; el padding superior deja subir 2px al chip sin que se recorte */
@@ -1282,6 +1406,13 @@ section[id],
   .marquee:hover .marquee__track {
     animation-play-state: running;
   }
+}
+
+/* Pausa con el botón (script.js pone .is-paused). Tiene la misma especificidad que las dos reglas de hover
+   de arriba y va después, así que les gana. Un solo "paused" vale para todas las animaciones del track,
+   también el freno; al quitar la clase, cada una sigue desde donde iba y las filas no saltan. */
+.marquee.is-paused .marquee__track {
+  animation-play-state: paused;
 }
 
 @keyframes marquee {
