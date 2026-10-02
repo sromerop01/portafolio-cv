@@ -9,7 +9,7 @@ Producción: https://sromerop.sales-control.com/
 - HTML, CSS y JavaScript sin frameworks, librerías, npm ni proceso de compilación. No agregues dependencias.
 - `index.html`: todo el contenido. Al inicio del `<body>` está el sprite de íconos en línea (`svg.icon-sprite`).
 - `styles.css`: organizado por sección con comentarios de encabezado. Paleta y fuentes en `:root`.
-- `script.js`: una función `init*` por comportamiento (`initScramble`, `initPhotoFallback`, `initProjectCards`, `initNav`), cada una llamada al final de su bloque.
+- `script.js`: una función `init*` por comportamiento, llamada justo después de definirla. Si agregas un comportamiento, sigue ese patrón.
 - `assets/img/`: foto de perfil e imagen para compartir. `assets/sromerop-icons/favicon/`: favicons y manifest.
 - `assets/sromerop-icons/skills/` es el paquete de íconos de origen. El sitio no carga `skills-sprite.svg`, `skills.css` ni `contact.css`: para usar un ícono, copia su `<symbol>` al sprite en línea de `index.html` y úsalo con `<svg aria-hidden="true" focusable="false"><use href="#i-nombre"></use></svg>`.
 
@@ -18,6 +18,11 @@ Producción: https://sromerop.sales-control.com/
 - Sirve la carpeta con `python3 -m http.server 8000` (o Live Server) y abre `http://localhost:8000`.
 - No abras `index.html` como archivo (`file://`): el navegador bloquea el manifest con un error de CORS que no es un problema del código.
 - `.htaccess` (por ejemplo, la página 404) solo funciona en producción; los servidores locales no lo leen.
+
+## Publicación
+
+- Se publica por SSH: el repo está clonado en la carpeta pública del servidor y se actualiza con `git pull` de `main`. Un push no publica nada por sí solo.
+- Todo lo que está en el repo queda accesible en el sitio, incluidos este archivo y `README.md`. No guardes notas privadas, borradores ni credenciales en el repo.
 
 ## Caché del CDN: regla obligatoria
 
@@ -34,6 +39,7 @@ Producción: https://sromerop.sales-control.com/
 - `--header-h` es el alto del header fijo; úsalo para el alto del Inicio y los `scroll-margin-top`.
 - Estructura de sección: `<section id="…" class="section" aria-labelledby="…-title">` → `.container` → `.sheet-header` (número `aria-hidden` + `h2`). Las tarjetas parten de la clase base `.card`.
 - Nombres de clase en BEM (`bloque__elemento--modificador`). Estados con `is-*` (`.is-open`, `.is-hovered`). El `<html>` recibe `.js` cuando hay JavaScript.
+- Clases y funciones en inglés; textos visibles y comentarios en español. Los comentarios explican el porqué, como los de `?v=` y del sprite.
 
 ## Accesibilidad (se revisa en cada tarjeta)
 
@@ -46,6 +52,12 @@ Producción: https://sromerop.sales-control.com/
 - No agregues textos visibles de menos de 12px.
 - Sin scroll horizontal entre 320px y 1440px.
 - Para insertar texto desde JS usa `textContent`, nunca `innerHTML` con datos.
+
+## Patrones ya resueltos
+
+- Tarjeta clicable completa: enlace extendido con `::after` (ver `.project__link`). No envuelvas la tarjeta en un `<a>`.
+- Botón con dos estados: clase `is-*` y texto o `aria-label` actualizados desde JS (ver `.marquee-toggle`).
+- Íconos: `<symbol>` en el sprite en línea + `<use href="#i-…">`.
 
 ## Flujo de trabajo
 
