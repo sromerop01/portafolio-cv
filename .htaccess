@@ -1,0 +1,2 @@
+RedirectMatch 404 ^/(CLAUDE|README)\.md$
+RedirectMatch 404 ^/\.gitignore$
