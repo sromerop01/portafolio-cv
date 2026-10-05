@@ -40,8 +40,8 @@
   <script>document.documentElement.classList.add('js');</script>
   <!-- ?v=: el CDN del hosting guarda styles.css y script.js en caché (index.html no). Al desplegar cambios en
        alguno de los dos, cambiar la versión para que se descargue el archivo nuevo y no la copia vieja -->
-  <link rel="stylesheet" href="styles.css?v=20261005">
-  <script src="script.js?v=20261005" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261005b">
+  <script src="script.js?v=20261005b" defer></script>
 </head>
 
 <body>
@@ -778,14 +778,23 @@
           <h2 id="certs-title" class="sheet-header__title">Certificaciones y aprendizaje</h2>
         </div>
 
+        <!-- Tarjetas clicables completas: el ::after de .cert__link las cubre (enlace extendido, como en Proyectos) -->
         <ul class="certs" role="list">
           <li class="card cert">
             <h3 class="cert__name">AWS Academy Cloud Foundations</h3>
             <time class="cert__year" datetime="2026">2026</time>
+            <a class="cert__link" href="https://www.credly.com/badges/e436c9dd-3e97-423e-b8c5-43e66747195c/public_url"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Ver credencial de AWS Academy Cloud Foundations (abre en una pestaña nueva)">Ver credencial
+              <span aria-hidden="true">↗</span></a>
           </li>
           <li class="card cert">
             <h3 class="cert__name">Google Cloud Fundamentals: Core Infrastructure</h3>
             <time class="cert__year" datetime="2026">2026</time>
+            <a class="cert__link" href="https://www.skills.google/public_profiles/7070f373-87da-44b9-8af2-63403c858087"
+              target="_blank" rel="noopener noreferrer"
+              aria-label="Ver credencial de Google Cloud Fundamentals: Core Infrastructure (abre en una pestaña nueva)">Ver
+              credencial <span aria-hidden="true">↗</span></a>
           </li>
         </ul>
       </div>

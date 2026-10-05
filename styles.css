@@ -1133,10 +1133,11 @@ section[id],
   color: var(--text-muted);
 }
 
-/* --- Enlaces externos (proyectos y tarjeta final) --- */
+/* --- Enlaces externos (proyectos, tarjeta final y certificaciones, que reutilizan este enlace extendido) --- */
 
 .project__link,
-.projects__more-link {
+.projects__more-link,
+.cert__link {
   font-family: var(--font-mono);
   color: var(--accent);
   text-decoration: none;
@@ -1146,7 +1147,8 @@ section[id],
    o toque en cualquier parte abre el enlace, que sigue siendo uno solo. Es transparente y los eventos del mouse
    siguen llegando a .projects__cell, así que el brillo y la inclinación no cambian. */
 .project__link::after,
-.projects__more-link::after {
+.projects__more-link::after,
+.cert__link::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -1155,17 +1157,20 @@ section[id],
 
 /* Foco con teclado: el contorno rodea toda la tarjeta, no solo el texto del enlace */
 .project__link:focus-visible,
-.projects__more-link:focus-visible {
+.projects__more-link:focus-visible,
+.cert__link:focus-visible {
   outline: none;
 }
 
 .project__link:focus-visible::after,
-.projects__more-link:focus-visible::after {
+.projects__more-link:focus-visible::after,
+.cert__link:focus-visible::after {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-.project__link {
+.project__link,
+.cert__link {
   font-size: 0.75rem;
   line-height: 1.5;
   white-space: nowrap;
@@ -1598,18 +1603,22 @@ section[id],
   list-style: none;
 }
 
-/* Tarjeta (fondo, borde y radio vienen de .card): nombre a la izquierda y año a la derecha,
-   alineado con la primera línea del nombre aunque este ocupe dos */
+/* Tarjeta (fondo, borde y radio vienen de .card): nombre a la izquierda y año a la derecha, alineado con la
+   primera línea del nombre aunque este ocupe dos; "Ver credencial" abajo a la izquierda. La segunda fila (1fr)
+   toma el alto que sobra cuando la tarjeta vecina es más alta, así el enlace queda siempre al fondo.
+   position: relative para que el ::after de .cert__link la cubra completa (enlace extendido, ver Proyectos) */
 .cert {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
   padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
 }
 
 .cert__name {
-  flex: 1;
   margin: 0;
   font-size: 1.125rem;
   font-weight: 500;
@@ -1617,10 +1626,29 @@ section[id],
 }
 
 .cert__year {
-  flex: none;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   color: var(--accent);
+}
+
+/* Fuente, color, tamaño y foco vienen de las reglas de .project__link (Proyectos) */
+.cert__link {
+  grid-column: 1 / -1;
+  align-self: end;
+  justify-self: start;
+}
+
+/* Solo con mouse: el borde pasa a --accent (sin brillo ni inclinación) */
+@media (hover: hover) {
+  .cert:hover {
+    border-color: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert {
+    transition: none;
+  }
 }
 
 /* --- Escritorio: certificaciones en 2 columnas iguales --- */

@@ -11,7 +11,7 @@ Portafolio y hoja de vida web de Santiago Romero Porras, Ingeniero Mecánico for
 | 02 | Experiencia | Cargo actual y responsabilidades |
 | 03 | Proyectos | 5 proyectos con tecnologías y enlaces a demo o repositorio |
 | 04 | Habilidades | Marquee con los íconos del stack y tabla por área |
-| 05 | Certificaciones | Certificaciones cloud |
+| 05 | Certificaciones | Certificaciones cloud, cada una con enlace a su credencial pública |
 | 06 | Educación e idiomas | Carreras e idiomas |
 | 07 | Contacto | Correo, WhatsApp, LinkedIn, GitHub y descarga de la hoja de vida en PDF |
 
