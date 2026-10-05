@@ -1,2 +1,6 @@
 RedirectMatch 404 ^/(CLAUDE|README)\.md$
 RedirectMatch 404 ^/\.gitignore$
+
+# Página de error propia. Con una ruta local (no una URL completa), Apache responde con código 404
+# y el contenido de /404.html, sin redirigir. También la usan los 404 de las líneas de arriba
+ErrorDocument 404 /404.html

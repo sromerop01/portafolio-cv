@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada · Santiago Romero Porras</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0A1120">
+  <!-- Rutas absolutas: Apache sirve esta página desde cualquier dirección inexistente (p. ej. /proyectos/viejo),
+       así que una ruta relativa como "styles.css" apuntaría a /proyectos/styles.css -->
+  <link rel="icon" href="/assets/sromerop-icons/favicon/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/assets/sromerop-icons/favicon/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/sromerop-icons/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/sromerop-icons/favicon/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Mismo enlace de flechas que index.html: así toda flecha que se agregue aquí queda en Plex Mono -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97%E2%86%91%E2%86%93&display=swap"
+    rel="stylesheet">
+  <!-- ?v=: la misma versión que index.html. Al cambiarla allá (caché del CDN), cambiarla también aquí -->
+  <link rel="stylesheet" href="/styles.css?v=20261005b">
+  <style>
+    /* Contenido centrado vertical y horizontalmente en la ventana, sobre la cuadrícula del body */
+    .not-found {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding-block: 3rem;
+    }
+
+    .not-found__inner {
+      width: min(100% - 2rem, 40rem);
+    }
+
+    /* Línea de terminal y su error. overflow-wrap: una ruta larga parte la línea en vez de desbordar la ventana */
+    .not-found__prompt,
+    .not-found__error {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      overflow-wrap: anywhere;
+    }
+
+    .not-found__prompt {
+      margin-top: 2rem;
+    }
+
+    .not-found__error {
+      margin-top: 0.25rem;
+    }
+
+    .not-found__text {
+      margin: 1.5rem 0 0;
+      font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .not-found__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="not-found">
+    <div class="not-found__inner">
+      <div class="sheet-header">
+        <span class="sheet-header__number" aria-hidden="true">404</span>
+        <h1 class="sheet-header__title">Página no encontrada</h1>
+      </div>
+
+      <p class="not-found__prompt"><span class="accent" aria-hidden="true">$</span> cd <span
+          class="not-found__path">/ruta</span></p>
+      <p class="not-found__error">cd: esa ruta no existe en este sitio</p>
+
+      <p class="not-found__text">Puede que el enlace esté mal escrito o que la página se haya movido.</p>
+
+      <div class="not-found__actions">
+        <a class="btn btn--solid" href="/">Volver al inicio</a>
+        <a class="btn btn--outline" href="/#projects">Ver proyectos</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // --- Ruta pedida en la línea de terminal (sin JS se queda "/ruta") ---
+
+    function initNotFoundPath() {
+      const path = document.querySelector(".not-found__path");
+      if (!path) return;
+
+      // pathname llega codificado (/a%C3%B1o): se decodifica para mostrar /año. Con una secuencia % inválida,
+      // decodeURI lanza un error y se muestra tal cual. textContent: la ruta viene de la URL y nunca se interpreta como HTML
+      let text = location.pathname;
+      try {
+        text = decodeURI(text);
+      } catch {
+        // se deja la ruta codificada
+      }
+      path.textContent = text;
+    }
+
+    initNotFoundPath();
+  </script>
+</body>
+
+</html>

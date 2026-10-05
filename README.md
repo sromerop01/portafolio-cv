@@ -25,6 +25,7 @@ HTML, CSS y JavaScript, sin frameworks, librerías ni proceso de compilación. E
 
 ```text
 index.html                Contenido de todas las secciones, header de navegación y sprite de íconos en línea
+404.html                  Página de error 404 con el estilo del sitio (rutas absolutas; Apache la sirve por .htaccess)
 styles.css                Estilos por sección (paleta, fuentes y alto del header como variables en :root)
 script.js                 Scramble del Inicio, respaldo de la foto, brillo/inclinación de Proyectos
                           y navegación (menú móvil y sección activa)
@@ -34,6 +35,7 @@ assets/sromerop-icons/
   favicon/                Favicons, íconos de la app y site.webmanifest
   skills/                 Paquete de íconos de origen (el sitio no lo carga: los símbolos se copian a index.html)
 CLAUDE.md                 Convenciones del proyecto para asistentes de IA
+.htaccess                 Página 404 propia y bloqueo de CLAUDE.md, README.md y .gitignore (solo en Apache, no en local)
 ```
 
 ## Ejecutar en local
@@ -52,7 +54,7 @@ Puedes verlo aquí: <https://sromerop.sales-control.com/>
 
 ## Despliegue
 
-El CDN del hosting guarda en caché `styles.css` y `script.js`, pero no `index.html`. Cada vez que cambies alguno de los dos, sube el parámetro `?v=` de sus rutas en `index.html` (formato `AAAAMMDD`; si ya tiene la fecha de hoy, agrega una letra: `20260929b`). Si no, el navegador recibe el HTML nuevo con el CSS o el JS viejos.
+El CDN del hosting guarda en caché `styles.css` y `script.js`, pero no `index.html`. Cada vez que cambies alguno de los dos, sube el parámetro `?v=` de sus rutas en `index.html` y en `404.html` (formato `AAAAMMDD`; si ya tiene la fecha de hoy, agrega una letra: `20260929b`). Si no, el navegador recibe el HTML nuevo con el CSS o el JS viejos.
 
 ## Detalles
 
