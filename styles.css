@@ -420,10 +420,12 @@ section[id],
 
 /* --- Botones (son enlaces <a>) --- */
 
+/* gap de 1ch (un carácter mono) entre el texto y la flecha de "Descargar CV": flex descarta el espacio del HTML */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 1ch;
   min-height: 2.75rem;
   padding: 0.75rem 1.5rem;
   font-family: var(--font-mono);
@@ -1841,6 +1843,31 @@ section[id],
   .contact__arrow {
     transition: none;
   }
+}
+
+/* Descarga de la hoja de vida, 24px debajo de la lista. Bloque (no flex, que perdería el espacio antes de ↓)
+   del ancho de su texto; min-height de 44px: área táctil cómoda */
+.contact__download {
+  display: block;
+  width: fit-content;
+  min-height: 44px;
+  margin-top: 1.5rem;
+  padding-block: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact__download:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.contact__download:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* --- Escritorio: etiqueta con ícono (12.5rem) | valor | flecha al final de la fila --- */

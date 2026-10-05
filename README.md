@@ -6,14 +6,14 @@ Portafolio y hoja de vida web de Santiago Romero Porras, Ingeniero Mecánico for
 
 | # | Sección | Contenido |
 | --- | --- | --- |
-| — | Inicio | Presentación, credencial con foto y botones de contacto y proyectos |
+| — | Inicio | Presentación, credencial con foto y botones de contacto, proyectos y descarga del CV |
 | 01 | Perfil | Resumen profesional y línea de tiempo de formación |
 | 02 | Experiencia | Cargo actual y responsabilidades |
 | 03 | Proyectos | 5 proyectos con tecnologías y enlaces a demo o repositorio |
 | 04 | Habilidades | Marquee con los íconos del stack y tabla por área |
 | 05 | Certificaciones | Certificaciones cloud |
 | 06 | Educación e idiomas | Carreras e idiomas |
-| 07 | Contacto | Correo, WhatsApp, LinkedIn y GitHub |
+| 07 | Contacto | Correo, WhatsApp, LinkedIn, GitHub y descarga de la hoja de vida en PDF |
 
 Un header fijo enlaza las 7 secciones y resalta la que está a la vista. El pie de página incluye "Volver arriba ↑".
 
@@ -28,6 +28,7 @@ index.html                Contenido de todas las secciones, header de navegació
 styles.css                Estilos por sección (paleta, fuentes y alto del header como variables en :root)
 script.js                 Scramble del Inicio, respaldo de la foto, brillo/inclinación de Proyectos
                           y navegación (menú móvil y sección activa)
+assets/docs/              Hoja de vida en PDF (la descargan el botón del Inicio y el enlace de Contacto)
 assets/img/               Foto de perfil e imagen para compartir en redes (og-image.png)
 assets/sromerop-icons/
   favicon/                Favicons, íconos de la app y site.webmanifest

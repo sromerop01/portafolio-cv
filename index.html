@@ -31,15 +31,17 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap"
     rel="stylesheet">
-  <!-- Las flechas ↗ y ↑ no están en los subconjuntos anteriores: se piden aparte (solo esos caracteres) -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97%E2%86%91&display=swap"
+  <!-- Flechas pedidas aparte (solo esos caracteres): ↗ no está en los subconjuntos anteriores; ↑ y ↓ sí (latino),
+       pero también van aquí para que toda flecha del sitio quede cubierta -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&text=%E2%86%97%E2%86%91%E2%86%93&display=swap"
     rel="stylesheet">
   <!-- Marca que hay JS: el CSS oculta el texto del scramble hasta que script.js lo arma, así nunca se ve el texto final antes -->
   <script>document.documentElement.classList.add('js');</script>
   <!-- ?v=: el CDN del hosting guarda styles.css y script.js en caché (index.html no). Al desplegar cambios en
        alguno de los dos, cambiar la versión para que se descargue el archivo nuevo y no la copia vieja -->
-  <link rel="stylesheet" href="styles.css?v=20260929f">
-  <script src="script.js?v=20260929f" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261005">
+  <script src="script.js?v=20261005" defer></script>
 </head>
 
 <body>
@@ -209,6 +211,9 @@
           <div class="hero__actions">
             <a class="btn btn--solid" href="#contact">Contactar</a>
             <a class="btn btn--outline" href="#projects">Ver proyectos</a>
+            <a class="btn btn--outline" href="assets/docs/CV-Santiago-Romero-Porras.pdf"
+              download="CV-Santiago-Romero-Porras.pdf" type="application/pdf">Descargar CV <span
+                aria-hidden="true">↓</span></a>
           </div>
         </div>
 
@@ -897,6 +902,12 @@
             </a>
           </li>
         </ul>
+
+        <!-- download: el PDF se descarga en vez de abrirse. El tamaño del texto es el del archivo: actualizarlo si cambia el PDF.
+             &nbsp;: en pantallas angostas la cifra no se separa de "KB" ni la flecha queda sola en otra línea -->
+        <a class="contact__download" href="assets/docs/CV-Santiago-Romero-Porras.pdf"
+          download="CV-Santiago-Romero-Porras.pdf" type="application/pdf">Descargar hoja de vida (PDF, 85&nbsp;KB)&nbsp;<span
+            aria-hidden="true">↓</span></a>
       </div>
     </section>
   </main>
