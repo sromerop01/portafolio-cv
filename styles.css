@@ -1107,10 +1107,29 @@ section[id],
   line-height: 1.4;
 }
 
+/* 12px abajo: la línea "Aporte" la sigue con su borde punteado (los 24px antes de las etiquetas los pone ella) */
 .project__desc {
-  margin: 0.75rem 0 1.5rem;
+  margin: 0.75rem 0;
   line-height: 1.6;
   color: var(--text-muted);
+}
+
+/* Qué hizo Santiago en el proyecto: separado de la descripción por un borde punteado, con 12px a cada lado */
+.project__contribution {
+  margin: 0 0 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px dotted var(--border);
+  line-height: 1.6;
+}
+
+.project__contribution-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 /* Etiquetas en píldoras, alineadas al final de la tarjeta */
