@@ -36,7 +36,7 @@ Producción: https://sromerop.sales-control.com/
 - Fuentes: `--font-mono` (IBM Plex Mono) para títulos, etiquetas, botones y detalles de terminal; `--font-sans` (IBM Plex Sans) para el texto corrido.
 - Solo tema oscuro (`color-scheme: dark`). No agregues tema claro ni media queries de `prefers-color-scheme`.
 - Móvil primero, con un solo punto de quiebre: `@media (width < 960px)` / `@media (width >= 960px)`.
-- `--header-h` es el alto del header fijo; úsalo para el alto del Inicio y los `scroll-margin-top`.
+- `--header-h` es el alto del header fijo; úsalo para el alto del Inicio y el `scroll-padding-top` de `html`.
 - Estructura de sección: `<section id="…" class="section" aria-labelledby="…-title">` → `.container` → `.sheet-header` (número `aria-hidden` + `h2`). Las tarjetas parten de la clase base `.card`.
 - Nombres de clase en BEM (`bloque__elemento--modificador`). Estados con `is-*` (`.is-open`, `.is-hovered`). El `<html>` recibe `.js` cuando hay JavaScript.
 - Clases y funciones en inglés; textos visibles y comentarios en español. Los comentarios explican el porqué, como los de `?v=` y del sprite.
