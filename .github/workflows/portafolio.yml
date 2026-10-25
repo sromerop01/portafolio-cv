@@ -1,0 +1,28 @@
+name: Portafolio CV
+
+on:
+  push:
+    branches: [ main, develop]
+  pull_request:
+    branches: [ main, develop ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '24'
+
+      - name: Validate HTML
+        run: npx --yes htmlhint@1.9.2 "**/*.html"
+
+      - name: Validate javascript syntax
+        run: node --check script.js
