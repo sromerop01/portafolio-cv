@@ -20,7 +20,7 @@
   --rx: 0deg;
   --ry: 0deg;
 
-  /* Alto del header fijo (56px en móvil, 64px en escritorio): lo usan el header, el Inicio y los scroll-margin */
+  /* Alto del header fijo (56px en móvil, 64px en escritorio): lo usan el header, el Inicio y el scroll-padding */
   --header-h: 56px;
 
   color-scheme: dark;
@@ -87,10 +87,11 @@ img {
   }
 }
 
-/* Al llegar desde un enlace, cada sección (y <main>, destino de "Saltar al contenido") queda 16px debajo del header */
-section[id],
-#contenido {
-  scroll-margin-top: calc(var(--header-h) + 16px);
+/* Desfase del header fijo en el contenedor, no en cada destino: así lo respetan también los saltos del foco con
+   Tab y Shift+Tab, que de otro modo dejan el elemento enfocado debajo del header. Al llegar desde un enlace,
+   cada sección (y <main>, destino de "Saltar al contenido") queda 16px debajo del header */
+html {
+  scroll-padding-top: calc(var(--header-h) + 16px);
 }
 
 /* ==========================================================================
@@ -1971,7 +1972,11 @@ section[id],
   margin-right: auto;
 }
 
+/* Área táctil de 44px: el padding agranda la caja ((44 − 18) / 2 = 13px por lado) y el margen negativo lo
+   compensa, así el texto y el pie no se mueven */
 .site-footer__top {
+  padding-block: 13px;
+  margin-block: -13px;
   font-size: 0.75rem;
   color: var(--text-muted);
   text-decoration: none;
