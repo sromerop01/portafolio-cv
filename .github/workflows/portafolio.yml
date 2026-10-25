@@ -2,7 +2,7 @@ name: Portafolio CV
 
 on:
   push:
-    branches: [ main, develop, setup-github-actions ]
+    branches: [ main, develop]
   pull_request:
     branches: [ main, develop ]
 
