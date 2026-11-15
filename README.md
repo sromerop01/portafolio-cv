@@ -50,7 +50,7 @@ También sirve Live Server. Abierto como archivo (`file://`), el navegador bloqu
 
 ## Live demo
 
-Puedes verlo aquí: <https://sromerop.sales-control.com/>
+Puedes verlo aquí: <https://sromerop.dev/>
 
 ## Despliegue
 

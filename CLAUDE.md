@@ -2,7 +2,7 @@
 
 Portafolio y hoja de vida web de Santiago Romero Porras (Ingeniero Mecánico formándose como Ingeniero de Sistemas). Lo revisan reclutadores y empresas que evalúan su perfil para prácticas: todo cambio debe verse profesional y funcionar bien en escritorio y en celular. Estética de plano técnico oscuro, acento ámbar y detalles tipo terminal (`$ whoami`, `// comentario`, `›`).
 
-Producción: https://sromerop.sales-control.com/
+Producción: https://sromerop.dev/
 
 ## Stack y archivos
 
