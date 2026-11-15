@@ -1,8 +1,14 @@
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www\.sromerop\.dev$ [NC]
+
+# Dominio único: www.sromerop.dev y el dominio anterior (sromerop.sales-control.com) redirigen con 301
+# a https://sromerop.dev. Así buscadores y vistas previas (WhatsApp, LinkedIn) ven una sola URL
+RewriteCond %{HTTP_HOST} ^www\.sromerop\.dev$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^sromerop\.sales-control\.com$ [NC]
 RewriteRule ^(.*)$ https://sromerop.dev/$1 [R=301,L]
 
-# Solo si es una SPA con React Router (rutas tipo /proyectos):
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [L]
+RedirectMatch 404 ^/(CLAUDE|README)\.md$
+RedirectMatch 404 ^/\.gitignore$
+
+# Página de error propia. Con una ruta local (no una URL completa), Apache responde con código 404
+# y el contenido de /404.html, sin redirigir. También la usan los 404 de las líneas de arriba
+ErrorDocument 404 /404.html
