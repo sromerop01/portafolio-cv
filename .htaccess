@@ -1,6 +1,8 @@
-RedirectMatch 404 ^/(CLAUDE|README)\.md$
-RedirectMatch 404 ^/\.gitignore$
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.sromerop\.dev$ [NC]
+RewriteRule ^(.*)$ https://sromerop.dev/$1 [R=301,L]
 
-# Página de error propia. Con una ruta local (no una URL completa), Apache responde con código 404
-# y el contenido de /404.html, sin redirigir. También la usan los 404 de las líneas de arriba
-ErrorDocument 404 /404.html
+# Solo si es una SPA con React Router (rutas tipo /proyectos):
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
